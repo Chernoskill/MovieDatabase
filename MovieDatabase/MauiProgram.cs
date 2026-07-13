@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MovieDatabase.Services;
 
 namespace MovieDatabase
 {
@@ -18,6 +19,12 @@ namespace MovieDatabase
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton<MovieService>();
+            builder.Services.AddSingleton<MoviesViewModel>();
+
+            builder.Services.AddTransient<MovieDetailsViewModel>();
+            builder.Services.AddSingleton<DetailsPage>();
 
             return builder.Build();
         }
