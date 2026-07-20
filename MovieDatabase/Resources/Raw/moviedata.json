@@ -1,0 +1,29 @@
+{
+  "Tags": [
+    { "Id": "b3f1c1a0-1a2b-4c3d-8e4f-000000000001", "Name": "Drama" },
+    { "Id": "b3f1c1a0-1a2b-4c3d-8e4f-000000000002", "Name": "Comedy" },
+    { "Id": "b3f1c1a0-1a2b-4c3d-8e4f-000000000003", "Name": "Action" }
+  ],
+  "Movies": [
+    {
+      "Id": "a3f1c1a0-1a2b-4c3d-8e4f-000000000001",
+      "Title": "The Shawshank Redemption",
+      "Description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+      "Director": "Frank Darabont",
+      "Actors": [ "Tim Robbins", "Morgan Freeman" ],
+      "Year": "1994-09-22",
+      "Favorite": false,
+      "Tags": [ "b3f1c1a0-1a2b-4c3d-8e4f-000000000001" ]
+    },
+    {
+      "Id": "a3f1c1a0-1a2b-4c3d-8e4f-000000000002",
+      "Title": "The Godfather",
+      "Description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+      "Director": "Francis Ford Coppola",
+      "Actors": [ "Marlon Brando", "Al Pacino" ],
+      "Year": "1972-03-24",
+      "Favorite": false,
+      "Tags": [ "b3f1c1a0-1a2b-4c3d-8e4f-000000000001" ]
+    }
+  ]
+}

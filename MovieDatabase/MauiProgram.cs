@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MovieDatabase.Services;
 
 namespace MovieDatabase
@@ -20,13 +21,20 @@ namespace MovieDatabase
     		builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddSingleton<FileService>();
+            builder.Services.AddSingleton<DataService>();
             builder.Services.AddSingleton<MovieService>();
+            builder.Services.AddSingleton<TagService>();
             builder.Services.AddSingleton<MoviesViewModel>();
 
             builder.Services.AddTransient<MovieDetailsViewModel>();
             builder.Services.AddSingleton<DetailsPage>();
 
-            return builder.Build();
+            var app = builder.Build();
+
+            app.Services.GetRequiredService<DataService>().LoadAsync().GetAwaiter().GetResult();
+
+            return app;
         }
     }
 }

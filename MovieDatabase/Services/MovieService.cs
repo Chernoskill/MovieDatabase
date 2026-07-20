@@ -1,29 +1,17 @@
-﻿namespace MovieDatabase.Services
+namespace MovieDatabase.Services
 {
     public class MovieService
     {
-        List<Movie>? movieList;
-        public async Task<List<Movie>?> GetMovies()
+        readonly DataService dataService;
+
+        public MovieService(DataService dataService)
         {
-            if (movieList?.Count > 0)
-            {
-                return movieList;
-            }
+            this.dataService = dataService;
+        }
 
-            try
-            {
-                // Offline
-                using Stream stream = await FileSystem.OpenAppPackageFileAsync("moviedata.json");
-                using StreamReader reader = new StreamReader(stream);
-                string contents = await reader.ReadToEndAsync();
-                movieList = JsonSerializer.Deserialize(contents, MovieContext.Default.ListMovie);
-            }
-            catch
-            {
-
-            }
-
-            return movieList;
+        public Task<List<Movie>> GetMovies()
+        {
+            return Task.FromResult(dataService.Movies);
         }
     }
 }
