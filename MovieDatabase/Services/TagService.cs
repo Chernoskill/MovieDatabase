@@ -9,9 +9,10 @@ namespace MovieDatabase.Services
             this.dataService = dataService;
         }
 
-        public Task<List<Tag>> GetTags()
+        public async Task<List<Tag>> GetTags()
         {
-            return Task.FromResult(dataService.Tags);
+            await dataService.EnsureLoadedAsync();
+            return dataService.Tags;
         }
     }
 }

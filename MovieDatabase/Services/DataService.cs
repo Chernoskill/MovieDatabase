@@ -5,6 +5,7 @@ namespace MovieDatabase.Services
         const string DataFileName = "moviedata.json";
 
         readonly FileService fileService;
+        Task? loadTask;
 
         public List<Movie> Movies { get; private set; } = new();
         public List<Tag> Tags { get; private set; } = new();
@@ -14,7 +15,24 @@ namespace MovieDatabase.Services
             this.fileService = fileService;
         }
 
-        public async Task LoadAsync()
+        public Task EnsureLoadedAsync()
+        {
+            return loadTask ??= LoadAsync();
+        }
+
+        public Task SaveAsync()
+        {
+            MovieDatabaseData data = new()
+            {
+                Movies = Movies,
+                Tags = Tags
+            };
+
+            string json = JsonSerializer.Serialize(data, MovieDatabaseDataContext.Default.MovieDatabaseData);
+            return fileService.SaveFileAsync(DataFileName, json);
+        }
+
+        async Task LoadAsync()
         {
             try
             {

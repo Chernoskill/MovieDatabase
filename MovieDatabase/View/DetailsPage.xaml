@@ -35,7 +35,21 @@
 			<VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
 				<Label Style="{StaticResource MediumLabel}" Text="{Binding Movie.Description}" />
 				<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.Year, StringFormat='Year: {0}'}" />
-				<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.Favorite, StringFormat='Favorite: {0}'}" />
+				<ImageButton
+                    Source="fav0.png"
+                    Command="{Binding ToggleFavoriteCommand}"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Padding="0"
+                    HeightRequest="32"
+                    WidthRequest="32"
+                    HorizontalOptions="Start">
+					<ImageButton.Triggers>
+						<DataTrigger TargetType="ImageButton" Binding="{Binding Movie.Favorite}" Value="True">
+							<Setter Property="Source" Value="fav1.png" />
+						</DataTrigger>
+					</ImageButton.Triggers>
+				</ImageButton>
 			</VerticalStackLayout>
 		</Grid>
 	</ScrollView>

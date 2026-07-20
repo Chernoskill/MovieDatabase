@@ -9,9 +9,26 @@ namespace MovieDatabase.Services
             this.dataService = dataService;
         }
 
-        public Task<List<Movie>> GetMovies()
+        public async Task<List<Movie>> GetMovies()
         {
-            return Task.FromResult(dataService.Movies);
+            await dataService.EnsureLoadedAsync();
+            return dataService.Movies;
+        }
+
+        public Task ToggleFavoriteAsync(Movie movie)
+        {
+            movie.Favorite = !movie.Favorite;
+            return dataService.SaveAsync();
+        }
+
+        public Task DeleteMoviesAsync(IEnumerable<Movie> movies)
+        {
+            foreach (Movie movie in movies.ToList())
+            {
+                dataService.Movies.Remove(movie);
+            }
+
+            return dataService.SaveAsync();
         }
     }
 }

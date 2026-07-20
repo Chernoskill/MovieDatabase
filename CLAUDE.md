@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-MovieDatabase is a .NET MAUI cross-platform app targeting Android and Windows (net9.0). The single `.csproj` at `MovieDatabase/MovieDatabase.csproj` covers all platforms. Currently at early scaffold stage.
+MovieDatabase is a .NET MAUI cross-platform app targeting Android and Windows (net10.0). The single `.csproj` at `MovieDatabase/MovieDatabase.csproj` covers all platforms. Currently at early scaffold stage.
 MovieDatabase lets users view movie information in a list.
 The main view is a list of movie information. Each movie information contains the name, tag, years of release, personal favorite status, and storage identification string of an owned movie.
 The Storage Identification string is a string typed by the user. It lets the user know where the physical copy of the movie is stored.
@@ -18,17 +18,17 @@ The mobile app has another tab for a configuration view. In the configuration vi
 
 Build for Windows (primary dev target):
 ```
-dotnet build MovieDatabase/MovieDatabase.csproj -f net9.0-windows10.0.19041.0
+dotnet build MovieDatabase/MovieDatabase.csproj -f net10.0-windows10.0.19041
 ```
 
 Run on Windows (unpackaged — no MSIX required):
 ```
-dotnet run --project MovieDatabase/MovieDatabase.csproj -f net9.0-windows10.0.19041.0
+dotnet run --project MovieDatabase/MovieDatabase.csproj -f net10.0-windows10.0.19041
 ```
 
 Run on Android emulator:
 ```
-dotnet run --project MovieDatabase/MovieDatabase.csproj -f net9.0-android
+dotnet run --project MovieDatabase/MovieDatabase.csproj -f net10.0-android
 ```
 
 `WindowsPackageType` is set to `None`, so Windows builds run unpackaged without needing the MSIX/Store pipeline.
