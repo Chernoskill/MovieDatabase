@@ -21,6 +21,11 @@ namespace MovieDatabase.Services
             return dataService.SaveAsync();
         }
 
+        public Task SaveMovieAsync(Movie movie)
+        {
+            return dataService.SaveAsync();
+        }
+
         public Task DeleteMoviesAsync(IEnumerable<Movie> movies)
         {
             foreach (Movie movie in movies.ToList())

@@ -7,34 +7,89 @@
     Title="{Binding Movie.Title}"
     x:DataType="viewmodel:MovieDetailsViewModel">
 	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
-		<Grid RowDefinitions="Auto,Auto,*">
-			<BoxView
-                BackgroundColor="{StaticResource Primary}"
-                Grid.RowSpan="2"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill"/>
+		<Grid RowDefinitions="*,Auto">
+			<VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10">
 
-			<Border StrokeShape="RoundRectangle 80"
-                    Stroke="White"
-                    StrokeThickness="6"
-                    HeightRequest="172"
-                    WidthRequest="172"
-                    Margin="0,8,0,0"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center">
-			</Border>
-
-			<Label Style="{StaticResource LargeLabel}" 
-                   Grid.Row="1"
+				<Label Style="{StaticResource LargeLabel}"
                    TextColor="White"
                    FontAttributes="Bold"
-                   Text="{Binding Movie.Title}" 
+                   Text="{Binding Movie.Title}"
                    HorizontalOptions="Center"
-                   Margin="0,0,0,8"/>
+                   Margin="0,0,0,8"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Entry Text="{Binding Movie.Title}"
+                   Placeholder="Title"
+                   HorizontalTextAlignment="Center"
+                   IsVisible="{Binding IsEditing}"/>
 
-			<VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
-				<Label Style="{StaticResource MediumLabel}" Text="{Binding Movie.Description}" />
-				<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.Year, StringFormat='Year: {0}'}" />
+				<Label Style="{StaticResource MediumLabel}"
+                   Text="{Binding Movie.Description}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Editor Text="{Binding Movie.Description}"
+                    Placeholder="Description"
+                    AutoSize="TextChanges"
+                    IsVisible="{Binding IsEditing}"/>
+
+				<Label Style="{StaticResource SmallLabel}"
+                   Text="{Binding Movie.Director, StringFormat='Director: {0}'}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Entry Text="{Binding Movie.Director}"
+                   Placeholder="Director"
+                   IsVisible="{Binding IsEditing}"/>
+
+				<Label Style="{StaticResource SmallLabel}"
+                   Text="{Binding Movie.ActorsDisplay, StringFormat='Actors: {0}'}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Entry Text="{Binding ActorsText}"
+                   Placeholder="Actors (comma separated)"
+                   IsVisible="{Binding IsEditing}"/>
+
+				<Label Style="{StaticResource SmallLabel}"
+                   Text="{Binding Movie.Year, StringFormat='Year: {0:yyyy}'}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Entry Text="{Binding YearText}"
+                   Placeholder="Year"
+                   Keyboard="Numeric"
+                   IsVisible="{Binding IsEditing}"/>
+
+				<Label Style="{StaticResource SmallLabel}"
+                   Text="{Binding AssignedTagsDisplay, StringFormat='Tags: {0}'}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<VerticalStackLayout
+                    BindableLayout.ItemsSource="{Binding TagOptions}"
+                    IsVisible="{Binding IsEditing}"
+                    Spacing="4">
+					<BindableLayout.ItemTemplate>
+						<DataTemplate x:DataType="viewmodel:TagOption">
+							<HorizontalStackLayout Spacing="6">
+								<CheckBox IsChecked="{Binding IsSelected}" />
+								<Label Text="{Binding Name}" VerticalOptions="Center" />
+							</HorizontalStackLayout>
+						</DataTemplate>
+					</BindableLayout.ItemTemplate>
+				</VerticalStackLayout>
+
+			</VerticalStackLayout>
+
+			<HorizontalStackLayout
+                Grid.Row="0"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Spacing="4">
+				<Button
+                    Text="e"
+                    Style="{StaticResource ButtonOutline}"
+                    Command="{Binding ToggleEditCommand}"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    Padding="0">
+					<Button.Triggers>
+						<DataTrigger TargetType="Button" Binding="{Binding IsEditing}" Value="True">
+							<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+							<Setter Property="TextColor" Value="White" />
+						</DataTrigger>
+					</Button.Triggers>
+				</Button>
 				<ImageButton
                     Source="fav0.png"
                     Command="{Binding ToggleFavoriteCommand}"
@@ -43,14 +98,15 @@
                     Padding="0"
                     HeightRequest="32"
                     WidthRequest="32"
-                    HorizontalOptions="Start">
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
 					<ImageButton.Triggers>
 						<DataTrigger TargetType="ImageButton" Binding="{Binding Movie.Favorite}" Value="True">
 							<Setter Property="Source" Value="fav1.png" />
 						</DataTrigger>
 					</ImageButton.Triggers>
 				</ImageButton>
-			</VerticalStackLayout>
+			</HorizontalStackLayout>
 		</Grid>
 	</ScrollView>
 </ContentPage>

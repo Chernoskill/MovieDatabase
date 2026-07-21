@@ -5,11 +5,22 @@ namespace MovieDatabase.Model
     public partial class Movie : ObservableObject
     {
         public Guid Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public string? Director { get; set; }
-        public string[]? Actors { get; set; }
-        public DateOnly? Year { get; set; }
+
+        [ObservableProperty]
+        public partial string? Title { get; set; }
+
+        [ObservableProperty]
+        public partial string? Description { get; set; }
+
+        [ObservableProperty]
+        public partial string? Director { get; set; }
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ActorsDisplay))]
+        public partial string[]? Actors { get; set; }
+
+        [ObservableProperty]
+        public partial DateOnly? Year { get; set; }
 
         [ObservableProperty]
         public partial bool Favorite { get; set; }
