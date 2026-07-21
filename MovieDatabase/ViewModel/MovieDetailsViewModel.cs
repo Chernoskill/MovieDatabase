@@ -8,6 +8,8 @@ namespace MovieDatabase.ViewModel
         readonly MovieService movieService;
         readonly TagService tagService;
 
+        bool isNewMovie;
+
         [ObservableProperty]
         public required partial Movie Movie { get; set; }
 
@@ -35,7 +37,15 @@ namespace MovieDatabase.ViewModel
 
         partial void OnMovieChanged(Movie value)
         {
+            isNewMovie = false;
             _ = LoadTagOptionsAsync();
+        }
+
+        public void StartNewMovie()
+        {
+            Movie = new Movie();
+            isNewMovie = true;
+            EnterEditMode();
         }
 
         async Task LoadTagOptionsAsync()
@@ -50,6 +60,15 @@ namespace MovieDatabase.ViewModel
             }
 
             OnPropertyChanged(nameof(AssignedTagsDisplay));
+        }
+
+        void EnterEditMode()
+        {
+            ActorsText = Movie.ActorsDisplay;
+            YearText = Movie.Year?.Year.ToString();
+            _ = LoadTagOptionsAsync();
+
+            IsEditing = true;
         }
 
         [RelayCommand]
@@ -71,7 +90,15 @@ namespace MovieDatabase.ViewModel
 
                 Movie.Tags = TagOptions.Where(option => option.IsSelected).Select(option => option.Id).ToList();
 
-                await movieService.SaveMovieAsync(Movie);
+                if (isNewMovie)
+                {
+                    await movieService.AddMovieAsync(Movie);
+                    isNewMovie = false;
+                }
+                else
+                {
+                    await movieService.SaveMovieAsync(Movie);
+                }
 
                 OnPropertyChanged(nameof(AssignedTagsDisplay));
 
@@ -79,11 +106,7 @@ namespace MovieDatabase.ViewModel
             }
             else
             {
-                ActorsText = Movie.ActorsDisplay;
-                YearText = Movie.Year?.Year.ToString();
-                await LoadTagOptionsAsync();
-
-                IsEditing = true;
+                EnterEditMode();
             }
         }
     }

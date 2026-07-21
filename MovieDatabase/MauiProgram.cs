@@ -31,7 +31,7 @@ namespace MovieDatabase
             builder.Services.AddSingleton<MoviesViewModel>();
             builder.Services.AddTransient<MovieDetailsViewModel>();
 
-            builder.Services.AddSingleton<DetailsPage>();
+            builder.Services.AddTransient<DetailsPage>();
 
             var app = builder.Build();
 
