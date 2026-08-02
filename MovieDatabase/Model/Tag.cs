@@ -7,10 +7,13 @@ namespace MovieDatabase.Model
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public Tag(string name)
+        public int ColorIndex { get; set; }
+
+        public Tag(string name, int colorIndex = 0)
         {
             Id = Guid.NewGuid();
             Name = name;
+            ColorIndex = colorIndex;
         }
     }
 

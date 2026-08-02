@@ -24,10 +24,9 @@ namespace MovieDatabase.ViewModel
         public partial string? YearText { get; set; }
 
         public ObservableCollection<TagOption> TagOptions { get; } = new();
+        public ObservableCollection<TagBadge> AssignedTagBadges { get; } = new();
 
         public bool IsNotEditing => !IsEditing;
-
-        public string AssignedTagsDisplay => string.Join(", ", TagOptions.Where(option => option.IsSelected).Select(option => option.Name));
 
         public MovieDetailsViewModel(MovieService movieService, TagService tagService)
         {
@@ -53,13 +52,18 @@ namespace MovieDatabase.ViewModel
             List<Tag> tags = await tagService.GetTags();
 
             TagOptions.Clear();
+            AssignedTagBadges.Clear();
 
             foreach (Tag tag in tags)
             {
-                TagOptions.Add(new TagOption(tag, Movie.Tags.Contains(tag.Id)));
-            }
+                bool isSelected = Movie.Tags.Contains(tag.Id);
+                TagOptions.Add(new TagOption(tag, isSelected));
 
-            OnPropertyChanged(nameof(AssignedTagsDisplay));
+                if (isSelected)
+                {
+                    AssignedTagBadges.Add(new TagBadge(tag.Name, tag.ColorIndex));
+                }
+            }
         }
 
         void EnterEditMode()
@@ -100,7 +104,11 @@ namespace MovieDatabase.ViewModel
                     await movieService.SaveMovieAsync(Movie);
                 }
 
-                OnPropertyChanged(nameof(AssignedTagsDisplay));
+                AssignedTagBadges.Clear();
+                foreach (TagOption option in TagOptions.Where(option => option.IsSelected))
+                {
+                    AssignedTagBadges.Add(new TagBadge(option.Name, option.ColorIndex));
+                }
 
                 IsEditing = false;
             }

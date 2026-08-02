@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
+    xmlns:model="clr-namespace:MovieDatabase.Model"
     Title="{Binding Movie.Title}"
     x:DataType="viewmodel:MovieDetailsViewModel">
 	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
@@ -53,8 +54,24 @@
                    IsVisible="{Binding IsEditing}"/>
 
 				<Label Style="{StaticResource SmallLabel}"
-                   Text="{Binding AssignedTagsDisplay, StringFormat='Tags: {0}'}"
+                   Text="Tags"
                    IsVisible="{Binding IsNotEditing}"/>
+				<HorizontalStackLayout
+                    Spacing="6"
+                    IsVisible="{Binding IsNotEditing}"
+                    BindableLayout.ItemsSource="{Binding AssignedTagBadges}">
+					<BindableLayout.ItemTemplate>
+						<DataTemplate x:DataType="model:TagBadge">
+							<Border Style="{StaticResource TagChip}"
+                                Background="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}"
+                                Stroke="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}">
+								<Label Text="{Binding Name}"
+                                    TextColor="{Binding ColorIndex, Converter={StaticResource ColorIndexToContrastTextColorConverter}}"
+                                    FontSize="11" />
+							</Border>
+						</DataTemplate>
+					</BindableLayout.ItemTemplate>
+				</HorizontalStackLayout>
 				<VerticalStackLayout
                     BindableLayout.ItemsSource="{Binding TagOptions}"
                     IsVisible="{Binding IsEditing}"
@@ -63,6 +80,12 @@
 						<DataTemplate x:DataType="viewmodel:TagOption">
 							<HorizontalStackLayout Spacing="6">
 								<CheckBox IsChecked="{Binding IsSelected}" />
+								<Border WidthRequest="16" HeightRequest="16"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="1"
+                                    Stroke="{StaticResource Gray300}"
+                                    Background="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}"
+                                    VerticalOptions="Center" />
 								<Label Text="{Binding Name}" VerticalOptions="Center" />
 							</HorizontalStackLayout>
 						</DataTemplate>

@@ -2,6 +2,7 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MovieDatabase"
+             xmlns:converters="clr-namespace:MovieDatabase.Converters"
              x:Class="MovieDatabase.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -74,6 +75,9 @@
 				<Setter Property="Padding" Value="0" />
 				<Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}" />
 			</Style>
+
+			<converters:ColorIndexToColorConverter x:Key="ColorIndexToColorConverter" />
+			<converters:ColorIndexToContrastTextColorConverter x:Key="ColorIndexToContrastTextColorConverter" />
 
 			<Color x:Key="TagChipBackground">#2196F3</Color>
 

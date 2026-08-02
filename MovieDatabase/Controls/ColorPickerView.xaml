@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MovieDatabase.Controls.ColorPickerView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MovieDatabase.Controls"
+    x:Name="Root">
+    <Grid
+        x:Name="PaletteGrid"
+        RowDefinitions="Auto,Auto,Auto,Auto"
+        ColumnDefinitions="Auto,Auto,Auto,Auto"
+        RowSpacing="8"
+        ColumnSpacing="8">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate x:DataType="controls:PaletteSwatch">
+                <Border
+                    Grid.Row="{Binding Row}"
+                    Grid.Column="{Binding Column}"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="1"
+                    Stroke="{StaticResource Gray300}"
+                    Background="{Binding Color}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={x:Reference Root}, Path=SelectCommand}"
+                            CommandParameter="{Binding Index}" />
+                    </Border.GestureRecognizers>
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="StrokeThickness" Value="4" />
+                            <Setter Property="Stroke" Value="{StaticResource Primary}" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                </Border>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </Grid>
+</ContentView>

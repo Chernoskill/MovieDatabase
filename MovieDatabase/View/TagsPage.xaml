@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieDatabase.View.TagsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
+    xmlns:controls="clr-namespace:MovieDatabase.Controls"
+    Title="Tags"
+    x:DataType="viewmodel:TagsViewModel">
+	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+		<VerticalStackLayout Padding="10" Spacing="14">
+
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="Tags" />
+
+			<VerticalStackLayout BindableLayout.ItemsSource="{Binding Tags}" Spacing="8">
+				<BindableLayout.ItemTemplate>
+					<DataTemplate x:DataType="viewmodel:TagListItem">
+						<Border Style="{StaticResource CardView}" Padding="10">
+							<VerticalStackLayout Spacing="10">
+
+								<Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10" IsVisible="{Binding IsNotEditing}">
+									<Border Grid.Column="0"
+                                        WidthRequest="24" HeightRequest="24"
+                                        StrokeShape="RoundRectangle 12"
+                                        StrokeThickness="1"
+                                        Stroke="{StaticResource Gray300}"
+                                        Background="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}" />
+									<Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" Style="{StaticResource MediumLabel}" />
+									<Button Grid.Column="2" Text="Edit" Style="{StaticResource ButtonOutline}" Command="{Binding EditCommand}" />
+									<Button Grid.Column="3" Text="Delete" Style="{StaticResource ButtonOutline}" Command="{Binding DeleteCommand}" />
+								</Grid>
+
+								<VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditing}">
+									<Entry Text="{Binding EditName}" Placeholder="Tag name" />
+									<controls:ColorPickerView SelectedIndex="{Binding EditColorIndex}" />
+									<HorizontalStackLayout Spacing="10">
+										<Button Text="Save" Command="{Binding SaveCommand}" />
+										<Button Text="Cancel" Style="{StaticResource ButtonOutline}" Command="{Binding CancelCommand}" />
+									</HorizontalStackLayout>
+								</VerticalStackLayout>
+
+							</VerticalStackLayout>
+						</Border>
+					</DataTemplate>
+				</BindableLayout.ItemTemplate>
+			</VerticalStackLayout>
+
+			<BoxView HeightRequest="1" Color="{StaticResource Gray200}" Margin="0,10" />
+
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="Add tag" />
+			<Entry Text="{Binding NewTagName}" Placeholder="Tag name" />
+			<controls:ColorPickerView SelectedIndex="{Binding NewTagColorIndex}" />
+			<Button Text="Add" Command="{Binding AddTagCommand}" HorizontalOptions="Start" />
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

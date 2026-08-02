@@ -103,11 +103,15 @@
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
 										<Label Style="{StaticResource MediumLabel}" Text="{Binding Director}" />
 										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay}" />
-										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagNames}">
+										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagBadges}">
 											<BindableLayout.ItemTemplate>
-												<DataTemplate x:DataType="x:String">
-													<Border Style="{StaticResource TagChip}">
-														<Label Text="{Binding .}" TextColor="White" FontSize="11" />
+												<DataTemplate x:DataType="model:TagBadge">
+													<Border Style="{StaticResource TagChip}"
+                                                        Background="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}"
+                                                        Stroke="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}">
+														<Label Text="{Binding Name}"
+                                                            TextColor="{Binding ColorIndex, Converter={StaticResource ColorIndexToContrastTextColorConverter}}"
+                                                            FontSize="11" />
 													</Border>
 												</DataTemplate>
 											</BindableLayout.ItemTemplate>

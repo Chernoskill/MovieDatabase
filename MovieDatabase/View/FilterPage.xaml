@@ -36,6 +36,12 @@
 					<DataTemplate x:DataType="viewmodel:TagOption">
 						<HorizontalStackLayout Spacing="6">
 							<CheckBox IsChecked="{Binding IsSelected}" />
+							<Border WidthRequest="16" HeightRequest="16"
+                                StrokeShape="RoundRectangle 8"
+                                StrokeThickness="1"
+                                Stroke="{StaticResource Gray300}"
+                                Background="{Binding ColorIndex, Converter={StaticResource ColorIndexToColorConverter}}"
+                                VerticalOptions="Center" />
 							<Label Text="{Binding Name}" VerticalOptions="Center" />
 						</HorizontalStackLayout>
 					</DataTemplate>

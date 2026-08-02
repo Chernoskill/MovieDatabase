@@ -33,6 +33,11 @@
             Title="Add"
             ContentTemplate="{DataTemplate local:DetailsPage}"
             Route="AddMovie" />
+
+		<ShellContent
+            Title="Tags"
+            ContentTemplate="{DataTemplate view:TagsPage}"
+            Route="TagsPage" />
 	</TabBar>
 
 </Shell>

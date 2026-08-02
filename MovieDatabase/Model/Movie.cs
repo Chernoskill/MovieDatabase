@@ -35,7 +35,7 @@ namespace MovieDatabase.Model
         public string ActorsDisplay => Actors is null ? string.Empty : string.Join(", ", Actors);
 
         [JsonIgnore]
-        public List<string> TagNames { get; set; } = new List<string>();
+        public List<TagBadge> TagBadges { get; set; } = new List<TagBadge>();
 
         public Movie()
         {

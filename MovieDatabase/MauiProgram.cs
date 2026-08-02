@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MovieDatabase.Services;
+using MovieDatabase.View;
 
 namespace MovieDatabase
 {
@@ -32,9 +33,11 @@ namespace MovieDatabase
             builder.Services.AddSingleton<MoviesViewModel>();
             builder.Services.AddTransient<MovieDetailsViewModel>();
             builder.Services.AddTransient<FilterViewModel>();
+            builder.Services.AddTransient<TagsViewModel>();
 
             builder.Services.AddTransient<DetailsPage>();
             builder.Services.AddTransient<FilterPage>();
+            builder.Services.AddTransient<TagsPage>();
 
             var app = builder.Build();
 

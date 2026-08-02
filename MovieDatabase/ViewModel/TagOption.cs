@@ -4,6 +4,7 @@ namespace MovieDatabase.ViewModel
     {
         public Guid Id { get; }
         public string Name { get; }
+        public int ColorIndex { get; }
 
         [ObservableProperty]
         public partial bool IsSelected { get; set; }
@@ -12,6 +13,7 @@ namespace MovieDatabase.ViewModel
         {
             Id = tag.Id;
             Name = tag.Name;
+            ColorIndex = tag.ColorIndex;
             IsSelected = isSelected;
         }
     }

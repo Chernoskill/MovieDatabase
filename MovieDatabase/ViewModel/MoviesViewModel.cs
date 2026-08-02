@@ -154,10 +154,10 @@ namespace MovieDatabase.ViewModel
                 {
                     foreach (Movie movie in movies.Where(criteria.Matches))
                     {
-                        movie.TagNames = movie.Tags
-                            .Select(tagId => tags.FirstOrDefault(tag => tag.Id == tagId)?.Name)
-                            .Where(name => name != null)
-                            .Select(name => name!)
+                        movie.TagBadges = movie.Tags
+                            .Select(tagId => tags.FirstOrDefault(tag => tag.Id == tagId))
+                            .Where(tag => tag != null)
+                            .Select(tag => new TagBadge(tag!.Name, tag.ColorIndex))
                             .ToList();
 
                         Movies.Add(movie);
