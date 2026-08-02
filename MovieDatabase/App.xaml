@@ -75,6 +75,16 @@
 				<Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}" />
 			</Style>
 
+			<Color x:Key="TagChipBackground">#2196F3</Color>
+
+			<Style x:Key="TagChip" TargetType="Border">
+				<Setter Property="Background" Value="{StaticResource TagChipBackground}" />
+				<Setter Property="Stroke" Value="{StaticResource TagChipBackground}" />
+				<Setter Property="StrokeShape" Value="RoundRectangle 8" />
+				<Setter Property="StrokeThickness" Value="1" />
+				<Setter Property="Padding" Value="8,2" />
+			</Style>
+
 		</ResourceDictionary>
     </Application.Resources>
 </Application>

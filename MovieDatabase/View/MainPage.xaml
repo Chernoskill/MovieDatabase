@@ -103,6 +103,15 @@
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
 										<Label Style="{StaticResource MediumLabel}" Text="{Binding Director}" />
 										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay}" />
+										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagNames}">
+											<BindableLayout.ItemTemplate>
+												<DataTemplate x:DataType="x:String">
+													<Border Style="{StaticResource TagChip}">
+														<Label Text="{Binding .}" TextColor="White" FontSize="11" />
+													</Border>
+												</DataTemplate>
+											</BindableLayout.ItemTemplate>
+										</HorizontalStackLayout>
 									</VerticalStackLayout>
 									<ImageButton
                                             Grid.Column="1"

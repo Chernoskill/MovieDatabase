@@ -34,6 +34,9 @@ namespace MovieDatabase.Model
         [JsonIgnore]
         public string ActorsDisplay => Actors is null ? string.Empty : string.Join(", ", Actors);
 
+        [JsonIgnore]
+        public List<string> TagNames { get; set; } = new List<string>();
+
         public Movie()
         {
             Id = Guid.NewGuid();

@@ -154,6 +154,12 @@ namespace MovieDatabase.ViewModel
                 {
                     foreach (Movie movie in movies.Where(criteria.Matches))
                     {
+                        movie.TagNames = movie.Tags
+                            .Select(tagId => tags.FirstOrDefault(tag => tag.Id == tagId)?.Name)
+                            .Where(name => name != null)
+                            .Select(name => name!)
+                            .ToList();
+
                         Movies.Add(movie);
                     }
                 }
