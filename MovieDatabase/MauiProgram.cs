@@ -27,11 +27,14 @@ namespace MovieDatabase
             builder.Services.AddSingleton<DataService>();
             builder.Services.AddSingleton<MovieService>();
             builder.Services.AddSingleton<TagService>();
+            builder.Services.AddSingleton<FilterService>();
 
             builder.Services.AddSingleton<MoviesViewModel>();
             builder.Services.AddTransient<MovieDetailsViewModel>();
+            builder.Services.AddTransient<FilterViewModel>();
 
             builder.Services.AddTransient<DetailsPage>();
+            builder.Services.AddTransient<FilterPage>();
 
             var app = builder.Build();
 

@@ -6,12 +6,21 @@ namespace MovieDatabase.ViewModel
     {
         public ObservableCollection<Movie> Movies { get; } = new();
         public ObservableCollection<Movie> MarkedMovies { get; } = new();
-        readonly MovieService movieService;
+        public ObservableCollection<ActiveFilterChip> ActiveFilters { get; } = new();
 
-        public MoviesViewModel(MovieService movieService)
+        readonly MovieService movieService;
+        readonly FilterService filterService;
+        readonly TagService tagService;
+
+        public bool HasActiveFilters => ActiveFilters.Count > 0;
+
+        public MoviesViewModel(MovieService movieService, FilterService filterService, TagService tagService)
         {
             Title = "Movie Database";
             this.movieService = movieService;
+            this.filterService = filterService;
+            this.tagService = tagService;
+            filterService.FilterChanged += () => _ = GetMoviesCommand.ExecuteAsync(null);
             _ = GetMoviesCommand.ExecuteAsync(null);
         }
 
@@ -27,6 +36,19 @@ namespace MovieDatabase.ViewModel
         {
             {"Movie", movie }
         });
+        }
+
+        [RelayCommand]
+        async Task GoToFilterAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(FilterPage));
+        }
+
+        [RelayCommand]
+        void ClearAllFilters()
+        {
+            filterService.Criteria.Reset();
+            filterService.NotifyFilterChanged();
         }
 
         [ObservableProperty]
@@ -119,19 +141,24 @@ namespace MovieDatabase.ViewModel
             {
                 IsBusy = true;
                 List<Movie>? movies = await movieService.GetMovies();
+                List<Tag> tags = await tagService.GetTags();
 
                 if (Movies.Count != 0)
                 {
                     Movies.Clear();
                 }
 
+                FilterCriteria criteria = filterService.Criteria;
+
                 if (movies != null)
                 {
-                    foreach (Movie movie in movies)
+                    foreach (Movie movie in movies.Where(criteria.Matches))
                     {
                         Movies.Add(movie);
                     }
                 }
+
+                RefreshActiveFilters(criteria, tags);
             }
             catch (Exception ex)
             {
@@ -144,6 +171,80 @@ namespace MovieDatabase.ViewModel
                 IsRefreshing = false;
             }
 
+        }
+
+        void RefreshActiveFilters(FilterCriteria criteria, List<Tag> tags)
+        {
+            ActiveFilters.Clear();
+
+            if (!string.IsNullOrWhiteSpace(criteria.TitleFilter))
+            {
+                ActiveFilters.Add(new ActiveFilterChip($"Title: {criteria.TitleFilter}", () =>
+                {
+                    criteria.TitleFilter = null;
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            if (!string.IsNullOrWhiteSpace(criteria.DescriptionFilter))
+            {
+                ActiveFilters.Add(new ActiveFilterChip($"Description: {criteria.DescriptionFilter}", () =>
+                {
+                    criteria.DescriptionFilter = null;
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            if (!string.IsNullOrWhiteSpace(criteria.DirectorFilter))
+            {
+                ActiveFilters.Add(new ActiveFilterChip($"Director: {criteria.DirectorFilter}", () =>
+                {
+                    criteria.DirectorFilter = null;
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            if (!string.IsNullOrWhiteSpace(criteria.ActorsFilter))
+            {
+                ActiveFilters.Add(new ActiveFilterChip($"Actors: {criteria.ActorsFilter}", () =>
+                {
+                    criteria.ActorsFilter = null;
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            if (criteria.YearFrom != null || criteria.YearTo != null)
+            {
+                string label = $"Year: {criteria.YearFrom?.ToString() ?? "…"}-{criteria.YearTo?.ToString() ?? "…"}";
+                ActiveFilters.Add(new ActiveFilterChip(label, () =>
+                {
+                    criteria.YearFrom = null;
+                    criteria.YearTo = null;
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            if (criteria.Favorite != null)
+            {
+                string label = criteria.Favorite == true ? "Favorites only" : "Non-favorites";
+                ActiveFilters.Add(new ActiveFilterChip(label, () =>
+                {
+                    criteria.Favorite = null;
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            foreach (Guid tagId in criteria.TagIds.ToList())
+            {
+                string name = tags.FirstOrDefault(tag => tag.Id == tagId)?.Name ?? "?";
+                ActiveFilters.Add(new ActiveFilterChip($"Tag: {name}", () =>
+                {
+                    criteria.TagIds.Remove(tagId);
+                    filterService.NotifyFilterChanged();
+                }));
+            }
+
+            OnPropertyChanged(nameof(HasActiveFilters));
         }
     }
 }

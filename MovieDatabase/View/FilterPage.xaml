@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MovieDatabase.FilterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
+    Title="Filter Movies"
+    x:DataType="viewmodel:FilterViewModel">
+	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+		<VerticalStackLayout Padding="10" Spacing="10">
+
+			<Label Style="{StaticResource MediumLabel}" Text="Title" />
+			<Entry Text="{Binding TitleFilter}" Placeholder="Title contains… (use * as wildcard)" />
+
+			<Label Style="{StaticResource MediumLabel}" Text="Description" />
+			<Entry Text="{Binding DescriptionFilter}" Placeholder="Description contains… (use * as wildcard)" />
+
+			<Label Style="{StaticResource MediumLabel}" Text="Director" />
+			<Entry Text="{Binding DirectorFilter}" Placeholder="Director contains… (use * as wildcard)" />
+
+			<Label Style="{StaticResource MediumLabel}" Text="Actors" />
+			<Entry Text="{Binding ActorsFilter}" Placeholder="Actor contains… (use * as wildcard)" />
+
+			<Label Style="{StaticResource MediumLabel}" Text="Year range" />
+			<Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+				<Entry Grid.Column="0" Text="{Binding YearFromText}" Placeholder="From" Keyboard="Numeric" />
+				<Entry Grid.Column="1" Text="{Binding YearToText}" Placeholder="To" Keyboard="Numeric" />
+			</Grid>
+
+			<Label Style="{StaticResource MediumLabel}" Text="Favorite" />
+			<Picker ItemsSource="{Binding FavoriteOptions}" SelectedItem="{Binding FavoriteOption}" />
+
+			<Label Style="{StaticResource MediumLabel}" Text="Tags" />
+			<VerticalStackLayout BindableLayout.ItemsSource="{Binding TagOptions}" Spacing="4">
+				<BindableLayout.ItemTemplate>
+					<DataTemplate x:DataType="viewmodel:TagOption">
+						<HorizontalStackLayout Spacing="6">
+							<CheckBox IsChecked="{Binding IsSelected}" />
+							<Label Text="{Binding Name}" VerticalOptions="Center" />
+						</HorizontalStackLayout>
+					</DataTemplate>
+				</BindableLayout.ItemTemplate>
+			</VerticalStackLayout>
+
+			<HorizontalStackLayout Spacing="10" HorizontalOptions="Center" Margin="0,10,0,0">
+				<Button Text="Clear all" Style="{StaticResource ButtonOutline}" Command="{Binding ClearAllCommand}" />
+				<Button Text="Cancel" Style="{StaticResource ButtonOutline}" Command="{Binding CancelCommand}" />
+				<Button Text="Apply" Command="{Binding ApplyCommand}" />
+			</HorizontalStackLayout>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

@@ -10,12 +10,53 @@
     Title="Movies"
     x:DataType="viewmodel:MoviesViewModel">
 	<Grid
-        RowDefinitions="*,Auto"
+        RowDefinitions="Auto,Auto,*,Auto"
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
-		<RefreshView
+		<HorizontalStackLayout
             Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Padding="10,10,10,0"
+            HorizontalOptions="End">
+			<Button
+                Text="Filter"
+                Style="{StaticResource ButtonOutline}"
+                Command="{Binding GoToFilterCommand}" />
+		</HorizontalStackLayout>
+
+		<ScrollView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            IsVisible="{Binding HasActiveFilters}"
+            Padding="10,10,10,0">
+			<HorizontalStackLayout Spacing="6">
+				<HorizontalStackLayout BindableLayout.ItemsSource="{Binding ActiveFilters}" Spacing="6">
+					<BindableLayout.ItemTemplate>
+						<DataTemplate x:DataType="viewmodel:ActiveFilterChip">
+							<Border StrokeShape="RoundRectangle 12" Padding="8,4" Background="{StaticResource Primary}">
+								<HorizontalStackLayout Spacing="6">
+									<Label Text="{Binding Label}" TextColor="White" FontSize="12" VerticalOptions="Center" />
+									<Label Text="✕" TextColor="White" FontSize="12" VerticalOptions="Center">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Command="{Binding ClearCommand}" />
+										</Label.GestureRecognizers>
+									</Label>
+								</HorizontalStackLayout>
+							</Border>
+						</DataTemplate>
+					</BindableLayout.ItemTemplate>
+				</HorizontalStackLayout>
+				<Button
+                    Text="Clear all"
+                    Style="{StaticResource ButtonOutline}"
+                    Command="{Binding ClearAllFiltersCommand}" />
+			</HorizontalStackLayout>
+		</ScrollView>
+
+		<RefreshView
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             Command="{Binding GetMoviesCommand}"
             IsRefreshing="{Binding IsRefreshing}">
@@ -90,7 +131,7 @@
 		</RefreshView>
 
 		<ActivityIndicator
-            Grid.Row="0"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             HorizontalOptions="Fill"
             IsRunning="{Binding IsBusy}"
@@ -99,7 +140,7 @@
             VerticalOptions="Center" />
 
 		<HorizontalStackLayout
-            Grid.Row="1"
+            Grid.Row="3"
             Grid.ColumnSpan="2"
             Padding="10"
             Spacing="10"
