@@ -9,6 +9,7 @@ namespace MovieDatabase.ViewModel
         readonly TagService tagService;
 
         bool isNewMovie;
+        Movie? editSnapshot;
 
         [ObservableProperty]
         public required partial Movie Movie { get; set; }
@@ -68,6 +69,17 @@ namespace MovieDatabase.ViewModel
 
         void EnterEditMode()
         {
+            editSnapshot = new Movie
+            {
+                Title = Movie.Title,
+                Description = Movie.Description,
+                Director = Movie.Director,
+                Actors = Movie.Actors?.ToArray(),
+                Year = Movie.Year,
+                DisplayId = Movie.DisplayId,
+                Tags = new List<Guid>(Movie.Tags)
+            };
+
             ActorsText = Movie.ActorsDisplay;
             YearText = Movie.Year?.Year.ToString();
             _ = LoadTagOptionsAsync();
@@ -116,6 +128,31 @@ namespace MovieDatabase.ViewModel
             {
                 EnterEditMode();
             }
+        }
+
+        [RelayCommand]
+        async Task DiscardEditAsync()
+        {
+            if (isNewMovie)
+            {
+                IsEditing = false;
+                await Shell.Current.GoToAsync("//MainPage");
+                return;
+            }
+
+            if (editSnapshot != null)
+            {
+                Movie.Title = editSnapshot.Title;
+                Movie.Description = editSnapshot.Description;
+                Movie.Director = editSnapshot.Director;
+                Movie.Actors = editSnapshot.Actors;
+                Movie.Year = editSnapshot.Year;
+                Movie.DisplayId = editSnapshot.DisplayId;
+                Movie.Tags = editSnapshot.Tags;
+            }
+
+            await LoadTagOptionsAsync();
+            IsEditing = false;
         }
     }
 }

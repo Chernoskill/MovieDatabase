@@ -7,7 +7,8 @@
     xmlns:model="clr-namespace:MovieDatabase.Model"
     Title="{Binding Movie.Title}"
     x:DataType="viewmodel:MovieDetailsViewModel">
-	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+	<Grid RowDefinitions="*,Auto">
+		<ScrollView Grid.Row="0" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
 		<Grid RowDefinitions="*,Auto">
 			<VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10">
 
@@ -106,37 +107,54 @@
                 HorizontalOptions="End"
                 VerticalOptions="Start"
                 Spacing="4">
-				<Button
-                    Text="e"
-                    Style="{StaticResource ButtonOutline}"
-                    Command="{Binding ToggleEditCommand}"
-                    WidthRequest="40"
-                    HeightRequest="40"
-                    Padding="0">
-					<Button.Triggers>
-						<DataTrigger TargetType="Button" Binding="{Binding IsEditing}" Value="True">
-							<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-							<Setter Property="TextColor" Value="White" />
-						</DataTrigger>
-					</Button.Triggers>
-				</Button>
 				<ImageButton
-                    Source="fav0.png"
+                    Style="{StaticResource IconImageButton}"
+                    Source="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe87e;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
                     Command="{Binding ToggleFavoriteCommand}"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    Padding="0"
-                    HeightRequest="32"
-                    WidthRequest="32"
                     HorizontalOptions="End"
                     VerticalOptions="Center">
 					<ImageButton.Triggers>
 						<DataTrigger TargetType="ImageButton" Binding="{Binding Movie.Favorite}" Value="True">
-							<Setter Property="Source" Value="fav1.png" />
+							<Setter Property="Source" Value="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe87d;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}" />
 						</DataTrigger>
 					</ImageButton.Triggers>
 				</ImageButton>
 			</HorizontalStackLayout>
 		</Grid>
-	</ScrollView>
+		</ScrollView>
+
+		<HorizontalStackLayout
+            Grid.Row="1"
+            HorizontalOptions="End"
+            Padding="10"
+            Spacing="8">
+			<Button
+                Text=""
+                Style="{StaticResource IconButton}"
+                Command="{Binding ToggleEditCommand}">
+				<Button.ImageSource>
+					<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe145;" Size="{StaticResource IconGlyphSize}" Color="{StaticResource Primary}" />
+				</Button.ImageSource>
+				<Button.Triggers>
+					<DataTrigger TargetType="Button" Binding="{Binding IsEditing}" Value="True">
+						<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+						<Setter Property="ImageSource">
+							<Setter.Value>
+								<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe5ca;" Size="{StaticResource IconGlyphSize}" Color="White" />
+							</Setter.Value>
+						</Setter>
+					</DataTrigger>
+				</Button.Triggers>
+			</Button>
+			<Button
+                Text=""
+                Style="{StaticResource IconButton}"
+                Command="{Binding DiscardEditCommand}"
+                IsVisible="{Binding IsEditing}">
+				<Button.ImageSource>
+					<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe5c9;" Size="{StaticResource IconGlyphSize}" Color="{StaticResource Primary}" />
+				</Button.ImageSource>
+			</Button>
+		</HorizontalStackLayout>
+	</Grid>
 </ContentPage>

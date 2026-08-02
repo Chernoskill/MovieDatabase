@@ -20,8 +20,9 @@
             Padding="10,10,10,0"
             HorizontalOptions="End">
 			<Button
-                Text="Filter"
-                Style="{StaticResource ButtonOutline}"
+                Text=""
+                ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xef4f;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
+                Style="{StaticResource IconButton}"
                 Command="{Binding GoToFilterCommand}" />
 		</HorizontalStackLayout>
 
@@ -49,8 +50,9 @@
 					</BindableLayout.ItemTemplate>
 				</HorizontalStackLayout>
 				<Button
-                    Text="Clear all"
-                    Style="{StaticResource ButtonOutline}"
+                    Text=""
+                    ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xeb32;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
+                    Style="{StaticResource IconButton}"
                     Command="{Binding ClearAllFiltersCommand}" />
 			</HorizontalStackLayout>
 		</ScrollView>
@@ -120,19 +122,15 @@
 									</VerticalStackLayout>
 									<ImageButton
                                             Grid.Column="1"
-                                            Source="fav0.png"
+                                            Style="{StaticResource IconImageButton}"
+                                            Source="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe87e;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MoviesViewModel}}, x:DataType=viewmodel:MoviesViewModel, Path=ToggleFavoriteCommand}"
                                             CommandParameter="{Binding .}"
-                                            BackgroundColor="Transparent"
-                                            BorderWidth="0"
-                                            Padding="10"
-                                            HeightRequest="64"
-                                            WidthRequest="64"
                                             HorizontalOptions="End"
 										    VerticalOptions="Start">
 										<ImageButton.Triggers>
 											<DataTrigger TargetType="ImageButton" Binding="{Binding Favorite}" Value="True">
-												<Setter Property="Source" Value="fav1.png" />
+												<Setter Property="Source" Value="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe87d;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}" />
 											</DataTrigger>
 										</ImageButton.Triggers>
 									</ImageButton>
@@ -160,13 +158,15 @@
             Spacing="10"
             HorizontalOptions="End">
 			<Button
-                Text="Unmark"
-                Style="{StaticResource ButtonOutline}"
+                Text=""
+                ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xebb6;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
+                Style="{StaticResource IconButton}"
                 Command="{Binding UnmarkAllCommand}"
                 IsVisible="{Binding HasMarkedMovies}" />
 			<Button
-                Text="Delete"
-                Style="{StaticResource ButtonOutline}"
+                Text=""
+                ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe872;, Color={StaticResource DangerRed}, Size={StaticResource IconGlyphSize}}"
+                Style="{StaticResource IconButton}"
                 Command="{Binding DeleteMarkedCommand}"
                 IsVisible="{Binding HasMarkedMovies}" />
 		</HorizontalStackLayout>

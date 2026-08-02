@@ -18,6 +18,7 @@ namespace MovieDatabase
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("MaterialIconsOutlined-Regular.otf", "MaterialIconsOutlined");
                 });
 
 #if DEBUG
@@ -33,11 +34,11 @@ namespace MovieDatabase
             builder.Services.AddSingleton<MoviesViewModel>();
             builder.Services.AddTransient<MovieDetailsViewModel>();
             builder.Services.AddTransient<FilterViewModel>();
-            builder.Services.AddTransient<TagsViewModel>();
+            builder.Services.AddTransient<OptionsViewModel>();
 
             builder.Services.AddTransient<DetailsPage>();
             builder.Services.AddTransient<FilterPage>();
-            builder.Services.AddTransient<TagsPage>();
+            builder.Services.AddTransient<OptionsPage>();
 
             var app = builder.Build();
 

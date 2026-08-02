@@ -2,7 +2,7 @@ namespace MovieDatabase.Services
 {
     public class DataService
     {
-        const string DataFileName = "moviedata.json";
+        public const string DataFileName = "moviedata.json";
 
         readonly FileService fileService;
         Task? loadTask;
@@ -30,6 +30,34 @@ namespace MovieDatabase.Services
 
             string json = JsonSerializer.Serialize(data, MovieDatabaseDataContext.Default.MovieDatabaseData);
             return fileService.SaveFileAsync(DataFileName, json);
+        }
+
+        public Task ExportAsync(string directoryPath)
+        {
+            MovieDatabaseData data = new()
+            {
+                Movies = Movies,
+                Tags = Tags
+            };
+
+            string json = JsonSerializer.Serialize(data, MovieDatabaseDataContext.Default.MovieDatabaseData);
+            return fileService.ExportFileAsync(directoryPath, DataFileName, json);
+        }
+
+        public async Task ImportAsync(string filePath)
+        {
+            string contents = await File.ReadAllTextAsync(filePath);
+            MovieDatabaseData? data = JsonSerializer.Deserialize(contents, MovieDatabaseDataContext.Default.MovieDatabaseData);
+
+            if (data == null)
+            {
+                throw new InvalidDataException("The selected file does not contain valid movie database data.");
+            }
+
+            Movies = data.Movies;
+            Tags = data.Tags;
+
+            await SaveAsync();
         }
 
         async Task LoadAsync()

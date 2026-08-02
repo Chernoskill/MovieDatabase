@@ -25,19 +25,22 @@
 
 	<TabBar>
 		<ShellContent
-            Title="Movies"
+            Title=""
+            Icon="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe0ee;}"
             ContentTemplate="{DataTemplate view:MainPage}"
             Route="MainPage" />
 
 		<ShellContent
-            Title="Add"
+            Title=""
+            Icon="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe145;}"
             ContentTemplate="{DataTemplate local:DetailsPage}"
             Route="AddMovie" />
 
 		<ShellContent
-            Title="Tags"
-            ContentTemplate="{DataTemplate view:TagsPage}"
-            Route="TagsPage" />
+            Title=""
+            Icon="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe8b8;}"
+            ContentTemplate="{DataTemplate view:OptionsPage}"
+            Route="OptionsPage" />
 	</TabBar>
 
 </Shell>

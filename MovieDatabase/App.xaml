@@ -68,6 +68,28 @@
 				<Setter Property="HeightRequest" Value="40" />
 				<Setter Property="CornerRadius" Value="20" />
 			</Style>
+
+			<x:Double x:Key="IconButtonSize">44</x:Double>
+			<x:Int32 x:Key="IconButtonCornerRadius">22</x:Int32>
+			<x:Double x:Key="IconGlyphSize">28</x:Double>
+
+			<Style x:Key="IconButton" TargetType="Button">
+				<Setter Property="WidthRequest" Value="{StaticResource IconButtonSize}" />
+				<Setter Property="HeightRequest" Value="{StaticResource IconButtonSize}" />
+				<Setter Property="CornerRadius" Value="{StaticResource IconButtonCornerRadius}" />
+				<Setter Property="Padding" Value="0" />
+				<Setter Property="BorderWidth" Value="0" />
+				<Setter Property="BackgroundColor" Value="{StaticResource IconButtonBackground}" />
+			</Style>
+
+			<Style x:Key="IconImageButton" TargetType="ImageButton">
+				<Setter Property="WidthRequest" Value="{StaticResource IconButtonSize}" />
+				<Setter Property="HeightRequest" Value="{StaticResource IconButtonSize}" />
+				<Setter Property="CornerRadius" Value="{StaticResource IconButtonCornerRadius}" />
+				<Setter Property="Padding" Value="0" />
+				<Setter Property="BorderWidth" Value="0" />
+				<Setter Property="BackgroundColor" Value="Transparent" />
+			</Style>
 			<Style x:Key="CardView" TargetType="Border">
 				<Setter Property="Stroke" Value="#DDDDDD" />
 				<Setter Property="StrokeThickness" Value="1" />

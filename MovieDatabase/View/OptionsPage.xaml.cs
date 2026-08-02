@@ -1,10 +1,10 @@
 namespace MovieDatabase.View
 {
-    public partial class TagsPage : ContentPage
+    public partial class OptionsPage : ContentPage
     {
-        readonly TagsViewModel viewModel;
+        readonly OptionsViewModel viewModel;
 
-        public TagsPage(TagsViewModel viewModel)
+        public OptionsPage(OptionsViewModel viewModel)
         {
             InitializeComponent();
             this.viewModel = viewModel;
