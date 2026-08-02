@@ -76,6 +76,7 @@ namespace MovieDatabase.ViewModel
                 Director = Movie.Director,
                 Actors = Movie.Actors?.ToArray(),
                 Year = Movie.Year,
+                Country = Movie.Country,
                 DisplayId = Movie.DisplayId,
                 Tags = new List<Guid>(Movie.Tags)
             };
@@ -147,6 +148,7 @@ namespace MovieDatabase.ViewModel
                 Movie.Director = editSnapshot.Director;
                 Movie.Actors = editSnapshot.Actors;
                 Movie.Year = editSnapshot.Year;
+                Movie.Country = editSnapshot.Country;
                 Movie.DisplayId = editSnapshot.DisplayId;
                 Movie.Tags = editSnapshot.Tags;
             }

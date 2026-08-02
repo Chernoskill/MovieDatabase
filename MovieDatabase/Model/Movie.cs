@@ -20,7 +20,12 @@ namespace MovieDatabase.Model
         public partial string[]? Actors { get; set; }
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CountryYearDisplay))]
         public partial DateOnly? Year { get; set; }
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CountryYearDisplay))]
+        public partial string? Country { get; set; }
 
         [ObservableProperty]
         public partial bool Favorite { get; set; }
@@ -36,6 +41,22 @@ namespace MovieDatabase.Model
 
         [JsonIgnore]
         public string ActorsDisplay => Actors is null ? string.Empty : string.Join(", ", Actors);
+
+        [JsonIgnore]
+        public string CountryYearDisplay
+        {
+            get
+            {
+                string? year = Year?.Year.ToString();
+
+                if (string.IsNullOrEmpty(Country))
+                {
+                    return year ?? string.Empty;
+                }
+
+                return year is null ? Country : $"{Country} {year}";
+            }
+        }
 
         [JsonIgnore]
         public List<TagBadge> TagBadges { get; set; } = new List<TagBadge>();

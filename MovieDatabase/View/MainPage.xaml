@@ -87,11 +87,13 @@
 										<Setter Property="Background" Value="LightGray" />
 									</DataTrigger>
 								</Border.Triggers>
-								<Grid Padding="0" ColumnDefinitions="*,Auto">
+								<Grid Padding="0" ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
 									<VerticalStackLayout
                                             x:Name="TitleArea"
                                             VerticalOptions="Fill"
                                             Grid.Column="0"
+                                            Grid.Row="0"
+                                            Grid.RowSpan="2"
                                             Padding="10">
 										<VerticalStackLayout.Behaviors>
 											<toolkit:TouchBehavior
@@ -103,9 +105,9 @@
                                                 LongPressDuration="400" />
 										</VerticalStackLayout.Behaviors>
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-										<Label Style="{StaticResource MediumLabel}" Text="{Binding Director}" />
-										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay}" />
-										<Label Style="{StaticResource MicroLabel}" Text="{Binding DisplayId, StringFormat='ID: {0}'}" Margin="0,4,0,0" />
+										<Label Style="{StaticResource MediumLabel}" Text="{Binding CountryYearDisplay}" />
+										<Label Style="{StaticResource SmallLabel}" Text="{Binding Director, StringFormat='D: {0}'}" />
+										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay, StringFormat='A: {0}'}" />
 										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagBadges}">
 											<BindableLayout.ItemTemplate>
 												<DataTemplate x:DataType="model:TagBadge">
@@ -122,6 +124,7 @@
 									</VerticalStackLayout>
 									<ImageButton
                                             Grid.Column="1"
+                                            Grid.Row="0"
                                             Style="{StaticResource IconImageButton}"
                                             Source="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe87e;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MoviesViewModel}}, x:DataType=viewmodel:MoviesViewModel, Path=ToggleFavoriteCommand}"
@@ -134,6 +137,14 @@
 											</DataTrigger>
 										</ImageButton.Triggers>
 									</ImageButton>
+									<Label
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            Style="{StaticResource MicroLabel}"
+                                            Text="{Binding DisplayId}"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="End"
+                                            Margin="0,0,10,8" />
 								</Grid>
 							</Border>
 						</Grid>

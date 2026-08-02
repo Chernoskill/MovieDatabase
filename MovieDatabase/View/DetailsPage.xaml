@@ -55,6 +55,13 @@
                    IsVisible="{Binding IsEditing}"/>
 
 				<Label Style="{StaticResource SmallLabel}"
+                   Text="{Binding Movie.Country, StringFormat='Country: {0}'}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Entry Text="{Binding Movie.Country}"
+                   Placeholder="Country"
+                   IsVisible="{Binding IsEditing}"/>
+
+				<Label Style="{StaticResource SmallLabel}"
                    Text="{Binding Movie.DisplayId, StringFormat='ID: {0}'}"
                    IsVisible="{Binding IsNotEditing}"/>
 				<Entry Text="{Binding Movie.DisplayId}"
@@ -133,7 +140,7 @@
                 Style="{StaticResource IconButton}"
                 Command="{Binding ToggleEditCommand}">
 				<Button.ImageSource>
-					<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe145;" Size="{StaticResource IconGlyphSize}" Color="{StaticResource Primary}" />
+					<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe3c9;" Size="{StaticResource IconGlyphSize}" Color="{StaticResource Primary}" />
 				</Button.ImageSource>
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding IsEditing}" Value="True">
