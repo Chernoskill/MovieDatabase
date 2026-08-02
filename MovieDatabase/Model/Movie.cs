@@ -31,6 +31,9 @@ namespace MovieDatabase.Model
 
         public List<Guid> Tags { get; set; } = new List<Guid>();
 
+        [ObservableProperty]
+        public partial string? DisplayId { get; set; }
+
         [JsonIgnore]
         public string ActorsDisplay => Actors is null ? string.Empty : string.Join(", ", Actors);
 
@@ -42,11 +45,12 @@ namespace MovieDatabase.Model
             Id = Guid.NewGuid();
         }
 
-        public Movie(string title, DateOnly? year)
+        public Movie(string title, DateOnly? year, string? displayId)
         {
             Id = Guid.NewGuid();
             Title = title;
             Year = year;
+            DisplayId = displayId;
         }
     }
 

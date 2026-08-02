@@ -20,7 +20,7 @@
                    IsVisible="{Binding IsNotEditing}"/>
 				<Entry Text="{Binding Movie.Title}"
                    Placeholder="Title"
-                   HorizontalTextAlignment="Center"
+                   HorizontalTextAlignment="Start"
                    IsVisible="{Binding IsEditing}"/>
 
 				<Label Style="{StaticResource MediumLabel}"
@@ -51,6 +51,13 @@
 				<Entry Text="{Binding YearText}"
                    Placeholder="Year"
                    Keyboard="Numeric"
+                   IsVisible="{Binding IsEditing}"/>
+
+				<Label Style="{StaticResource SmallLabel}"
+                   Text="{Binding Movie.DisplayId, StringFormat='ID: {0}'}"
+                   IsVisible="{Binding IsNotEditing}"/>
+				<Entry Text="{Binding Movie.DisplayId}"
+                   Placeholder="Display ID"
                    IsVisible="{Binding IsEditing}"/>
 
 				<Label Style="{StaticResource SmallLabel}"

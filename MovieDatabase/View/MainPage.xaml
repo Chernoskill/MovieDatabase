@@ -103,6 +103,7 @@
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
 										<Label Style="{StaticResource MediumLabel}" Text="{Binding Director}" />
 										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay}" />
+										<Label Style="{StaticResource MicroLabel}" Text="{Binding DisplayId, StringFormat='ID: {0}'}" Margin="0,4,0,0" />
 										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagBadges}">
 											<BindableLayout.ItemTemplate>
 												<DataTemplate x:DataType="model:TagBadge">
