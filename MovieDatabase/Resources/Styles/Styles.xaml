@@ -40,7 +40,7 @@
     </Style>
 
     <Style x:Key="SectionDivider" TargetType="BoxView">
-        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="HeightRequest" Value="2" />
         <Setter Property="Color" Value="{StaticResource Gray200}" />
         <Setter Property="Margin" Value="0,10" />
     </Style>
@@ -246,7 +246,7 @@
     </Style>
 
     <Style TargetType="Label" x:Key="MicroLabel" BasedOn="{StaticResource BaseLabel}">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style TargetType="Label" x:Key="SmallLabel" BasedOn="{StaticResource BaseLabel}">

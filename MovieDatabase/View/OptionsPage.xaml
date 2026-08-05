@@ -65,9 +65,9 @@
 
 			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="Import / Export" />
 			<Label Text="Import a previously exported movie database file. This replaces the current data." />
-			<Button Text="Import" Command="{Binding ImportDataCommand}" HorizontalOptions="Start" />
+			<Button Text="Import" Command="{Binding ImportDataCommand}" HorizontalOptions="Fill" />
 			<Label Text="Export the movie collection to a folder of your choice." />
-			<Button Text="Export" Command="{Binding ExportDataCommand}" HorizontalOptions="Start" />
+			<Button Text="Export" Command="{Binding ExportDataCommand}" HorizontalOptions="Fill" />
 
 		</VerticalStackLayout>
 	</ScrollView>
