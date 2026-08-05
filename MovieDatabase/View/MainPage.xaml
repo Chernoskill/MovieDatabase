@@ -105,9 +105,9 @@
                                                 LongPressDuration="400" />
 										</VerticalStackLayout.Behaviors>
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-										<Label Style="{StaticResource MediumLabel}" Text="{Binding CountryYearDisplay}" />
-										<Label Style="{StaticResource SmallLabel}" Text="{Binding Director, StringFormat='D: {0}'}" />
-										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay, StringFormat='A: {0}'}" />
+										<Label Style="{StaticResource MediumLabel}" Text="{Binding CountryYearDisplay}" IsVisible="{Binding HasCountryYear}" />
+										<Label Style="{StaticResource SmallLabel}" Text="{Binding Director, StringFormat='D: {0}'}" IsVisible="{Binding HasDirector}" />
+										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay, StringFormat='A: {0}'}" IsVisible="{Binding HasActors}" />
 										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagBadges}">
 											<BindableLayout.ItemTemplate>
 												<DataTemplate x:DataType="model:TagBadge">

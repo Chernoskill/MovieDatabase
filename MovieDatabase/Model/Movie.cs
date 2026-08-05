@@ -13,18 +13,22 @@ namespace MovieDatabase.Model
         public partial string? Description { get; set; }
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasDirector))]
         public partial string? Director { get; set; }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ActorsDisplay))]
+        [NotifyPropertyChangedFor(nameof(HasActors))]
         public partial string[]? Actors { get; set; }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(CountryYearDisplay))]
+        [NotifyPropertyChangedFor(nameof(HasCountryYear))]
         public partial DateOnly? Year { get; set; }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(CountryYearDisplay))]
+        [NotifyPropertyChangedFor(nameof(HasCountryYear))]
         public partial string? Country { get; set; }
 
         [ObservableProperty]
@@ -57,6 +61,15 @@ namespace MovieDatabase.Model
                 return year is null ? Country : $"{Country} {year}";
             }
         }
+
+        [JsonIgnore]
+        public bool HasCountryYear => !string.IsNullOrEmpty(CountryYearDisplay);
+
+        [JsonIgnore]
+        public bool HasDirector => !string.IsNullOrEmpty(Director);
+
+        [JsonIgnore]
+        public bool HasActors => Actors is not null && Actors.Length > 0;
 
         [JsonIgnore]
         public List<TagBadge> TagBadges { get; set; } = new List<TagBadge>();
