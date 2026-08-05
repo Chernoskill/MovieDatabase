@@ -70,8 +70,8 @@
                 RadioButtonGroup.SelectedValue="{Binding SelectedLanguage}">
 				<!-- Language names are shown in their own language on purpose, not translated,
                      so users can find their language even if the current UI language is unreadable to them. -->
-				<RadioButton Content="English" Value="{x:Static loc:AppLanguage.English}" />
 				<RadioButton Content="Deutsch" Value="{x:Static loc:AppLanguage.German}" />
+				<RadioButton Content="English" Value="{x:Static loc:AppLanguage.English}" />
 			</VerticalStackLayout>
 
 			<BoxView Style="{StaticResource SectionDivider}" />
