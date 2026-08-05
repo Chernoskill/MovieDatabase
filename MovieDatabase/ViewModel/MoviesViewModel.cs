@@ -1,4 +1,5 @@
-﻿using MovieDatabase.Services;
+﻿using MovieDatabase.Localization;
+using MovieDatabase.Services;
 
 namespace MovieDatabase.ViewModel
 {
@@ -11,16 +12,20 @@ namespace MovieDatabase.ViewModel
         readonly MovieService movieService;
         readonly FilterService filterService;
         readonly TagService tagService;
+        readonly LocalizationResourceManager localization;
 
         public bool HasActiveFilters => ActiveFilters.Count > 0;
 
-        public MoviesViewModel(MovieService movieService, FilterService filterService, TagService tagService)
+        public MoviesViewModel(MovieService movieService, FilterService filterService, TagService tagService, LocalizationResourceManager localization)
         {
-            Title = "Movie Database";
             this.movieService = movieService;
             this.filterService = filterService;
             this.tagService = tagService;
+            this.localization = localization;
             filterService.FilterChanged += () => _ = GetMoviesCommand.ExecuteAsync(null);
+            // This view model is a singleton, so it outlives every page - the active filter chip
+            // labels below are built in code and need to be rebuilt whenever the language changes.
+            localization.CultureChanged += () => _ = GetMoviesCommand.ExecuteAsync(null);
             _ = GetMoviesCommand.ExecuteAsync(null);
         }
 
@@ -106,10 +111,10 @@ namespace MovieDatabase.ViewModel
             }
 
             bool confirmed = await Shell.Current.DisplayAlertAsync(
-                "Delete movies",
-                $"Delete {MarkedMovies.Count} selected movie(s)?",
-                "Delete",
-                "Cancel");
+                localization["MoviesPage_DeleteMoviesTitle"],
+                string.Format(localization["MoviesPage_DeleteMoviesMessage"], MarkedMovies.Count),
+                localization["Common_Delete"],
+                localization["Common_Cancel"]);
 
             if (!confirmed)
             {
@@ -169,7 +174,7 @@ namespace MovieDatabase.ViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get vies: {ex.Message}");
-                await Shell.Current.DisplayAlertAsync("Error!", ex.Message, "OK");
+                await Shell.Current.DisplayAlertAsync(localization["MoviesPage_ErrorTitle"], ex.Message, localization["Common_OK"]);
             }
             finally
             {
@@ -185,7 +190,7 @@ namespace MovieDatabase.ViewModel
 
             if (!string.IsNullOrWhiteSpace(criteria.TitleFilter))
             {
-                ActiveFilters.Add(new ActiveFilterChip($"Title: {criteria.TitleFilter}", () =>
+                ActiveFilters.Add(new ActiveFilterChip($"{localization["FilterPage_TitleLabel"]}: {criteria.TitleFilter}", () =>
                 {
                     criteria.TitleFilter = null;
                     filterService.NotifyFilterChanged();
@@ -194,7 +199,7 @@ namespace MovieDatabase.ViewModel
 
             if (!string.IsNullOrWhiteSpace(criteria.DescriptionFilter))
             {
-                ActiveFilters.Add(new ActiveFilterChip($"Description: {criteria.DescriptionFilter}", () =>
+                ActiveFilters.Add(new ActiveFilterChip($"{localization["FilterPage_DescriptionLabel"]}: {criteria.DescriptionFilter}", () =>
                 {
                     criteria.DescriptionFilter = null;
                     filterService.NotifyFilterChanged();
@@ -203,7 +208,7 @@ namespace MovieDatabase.ViewModel
 
             if (!string.IsNullOrWhiteSpace(criteria.DirectorFilter))
             {
-                ActiveFilters.Add(new ActiveFilterChip($"Director: {criteria.DirectorFilter}", () =>
+                ActiveFilters.Add(new ActiveFilterChip($"{localization["FilterPage_DirectorLabel"]}: {criteria.DirectorFilter}", () =>
                 {
                     criteria.DirectorFilter = null;
                     filterService.NotifyFilterChanged();
@@ -212,7 +217,7 @@ namespace MovieDatabase.ViewModel
 
             if (!string.IsNullOrWhiteSpace(criteria.ActorsFilter))
             {
-                ActiveFilters.Add(new ActiveFilterChip($"Actors: {criteria.ActorsFilter}", () =>
+                ActiveFilters.Add(new ActiveFilterChip($"{localization["FilterPage_ActorsLabel"]}: {criteria.ActorsFilter}", () =>
                 {
                     criteria.ActorsFilter = null;
                     filterService.NotifyFilterChanged();
@@ -221,7 +226,7 @@ namespace MovieDatabase.ViewModel
 
             if (criteria.YearFrom != null || criteria.YearTo != null)
             {
-                string label = $"Year: {criteria.YearFrom?.ToString() ?? "…"}-{criteria.YearTo?.ToString() ?? "…"}";
+                string label = $"{localization["MoviesPage_ChipYear"]}: {criteria.YearFrom?.ToString() ?? "…"}-{criteria.YearTo?.ToString() ?? "…"}";
                 ActiveFilters.Add(new ActiveFilterChip(label, () =>
                 {
                     criteria.YearFrom = null;
@@ -232,7 +237,7 @@ namespace MovieDatabase.ViewModel
 
             if (criteria.Favorite != null)
             {
-                string label = criteria.Favorite == true ? "Favorites only" : "Non-favorites";
+                string label = criteria.Favorite == true ? localization["Filter_FavoriteOnly"] : localization["Filter_FavoriteNonOnly"];
                 ActiveFilters.Add(new ActiveFilterChip(label, () =>
                 {
                     criteria.Favorite = null;
@@ -242,8 +247,8 @@ namespace MovieDatabase.ViewModel
 
             foreach (Guid tagId in criteria.TagIds.ToList())
             {
-                string name = tags.FirstOrDefault(tag => tag.Id == tagId)?.Name ?? "?";
-                ActiveFilters.Add(new ActiveFilterChip($"Tag: {name}", () =>
+                string name = tags.FirstOrDefault(tag => tag.Id == tagId)?.Name ?? localization["MoviesPage_ChipUnknownTag"];
+                ActiveFilters.Add(new ActiveFilterChip($"{localization["MoviesPage_ChipTag"]}: {name}", () =>
                 {
                     criteria.TagIds.Remove(tagId);
                     filterService.NotifyFilterChanged();

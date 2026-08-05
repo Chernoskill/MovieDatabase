@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Common_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+
+  <data name="MainPage_Title" xml:space="preserve"><value>Movies</value></data>
+  <data name="FilterPage_Title" xml:space="preserve"><value>Filter Movies</value></data>
+  <data name="OptionsPage_Title" xml:space="preserve"><value>Options</value></data>
+
+  <data name="MainPage_DirectorPrefix" xml:space="preserve"><value>D:</value></data>
+  <data name="MainPage_ActorsPrefix" xml:space="preserve"><value>A:</value></data>
+
+  <data name="FilterPage_TitleLabel" xml:space="preserve"><value>Title</value></data>
+  <data name="FilterPage_TitlePlaceholder" xml:space="preserve"><value>Title contains… (use * as wildcard)</value></data>
+  <data name="FilterPage_DescriptionLabel" xml:space="preserve"><value>Description</value></data>
+  <data name="FilterPage_DescriptionPlaceholder" xml:space="preserve"><value>Description contains… (use * as wildcard)</value></data>
+  <data name="FilterPage_DirectorLabel" xml:space="preserve"><value>Director</value></data>
+  <data name="FilterPage_DirectorPlaceholder" xml:space="preserve"><value>Director contains… (use * as wildcard)</value></data>
+  <data name="FilterPage_ActorsLabel" xml:space="preserve"><value>Actors</value></data>
+  <data name="FilterPage_ActorsPlaceholder" xml:space="preserve"><value>Actor contains… (use * as wildcard)</value></data>
+  <data name="FilterPage_YearRangeLabel" xml:space="preserve"><value>Year range</value></data>
+  <data name="FilterPage_YearFromPlaceholder" xml:space="preserve"><value>From</value></data>
+  <data name="FilterPage_YearToPlaceholder" xml:space="preserve"><value>To</value></data>
+  <data name="FilterPage_FavoriteLabel" xml:space="preserve"><value>Favorite</value></data>
+  <data name="FilterPage_TagsLabel" xml:space="preserve"><value>Tags</value></data>
+  <data name="FilterPage_ClearAll" xml:space="preserve"><value>Clear all</value></data>
+  <data name="FilterPage_Apply" xml:space="preserve"><value>Apply</value></data>
+
+  <data name="Filter_FavoriteAny" xml:space="preserve"><value>Any</value></data>
+  <data name="Filter_FavoriteOnly" xml:space="preserve"><value>Favorites only</value></data>
+  <data name="Filter_FavoriteNonOnly" xml:space="preserve"><value>Non-favorites</value></data>
+
+  <data name="DetailsPage_TitlePlaceholder" xml:space="preserve"><value>Title</value></data>
+  <data name="DetailsPage_DescriptionPlaceholder" xml:space="preserve"><value>Description</value></data>
+  <data name="DetailsPage_DirectorPlaceholder" xml:space="preserve"><value>Director</value></data>
+  <data name="DetailsPage_ActorsPlaceholder" xml:space="preserve"><value>Actors (comma separated)</value></data>
+  <data name="DetailsPage_YearPlaceholder" xml:space="preserve"><value>Year</value></data>
+  <data name="DetailsPage_CountryPlaceholder" xml:space="preserve"><value>Country</value></data>
+  <data name="DetailsPage_DisplayIdPlaceholder" xml:space="preserve"><value>Display ID</value></data>
+  <data name="DetailsPage_DirectorLabel" xml:space="preserve"><value>Director:</value></data>
+  <data name="DetailsPage_ActorsLabel" xml:space="preserve"><value>Actors:</value></data>
+  <data name="DetailsPage_YearLabel" xml:space="preserve"><value>Year:</value></data>
+  <data name="DetailsPage_CountryLabel" xml:space="preserve"><value>Country:</value></data>
+  <data name="DetailsPage_IdLabel" xml:space="preserve"><value>ID:</value></data>
+  <data name="DetailsPage_TagsLabel" xml:space="preserve"><value>Tags</value></data>
+
+  <data name="OptionsPage_TagsHeader" xml:space="preserve"><value>Tags</value></data>
+  <data name="OptionsPage_TagNamePlaceholder" xml:space="preserve"><value>Tag name</value></data>
+  <data name="OptionsPage_AddTagHeader" xml:space="preserve"><value>Add tag</value></data>
+  <data name="OptionsPage_LanguageHeader" xml:space="preserve"><value>Language</value></data>
+  <data name="OptionsPage_ImportExportHeader" xml:space="preserve"><value>Import / Export</value></data>
+  <data name="OptionsPage_ImportDescription" xml:space="preserve"><value>Import a previously exported movie database file. This replaces the current data.</value></data>
+  <data name="OptionsPage_ImportButton" xml:space="preserve"><value>Import</value></data>
+  <data name="OptionsPage_ExportDescription" xml:space="preserve"><value>Export the movie collection to a folder of your choice.</value></data>
+  <data name="OptionsPage_ExportButton" xml:space="preserve"><value>Export</value></data>
+
+  <data name="OptionsPage_DeleteTagTitle" xml:space="preserve"><value>Delete tag</value></data>
+  <data name="OptionsPage_DeleteTagMessage" xml:space="preserve"><value>Delete tag '{0}'? It will be removed from all movies.</value></data>
+  <data name="OptionsPage_ImportFailedTitle" xml:space="preserve"><value>Import failed</value></data>
+  <data name="OptionsPage_ImportCompleteTitle" xml:space="preserve"><value>Import complete</value></data>
+  <data name="OptionsPage_ImportCompleteMessage" xml:space="preserve"><value>The movie data was imported successfully.</value></data>
+  <data name="OptionsPage_ExportNotSupportedTitle" xml:space="preserve"><value>Not supported</value></data>
+  <data name="OptionsPage_ExportNotSupportedMessage" xml:space="preserve"><value>Exporting requires Android 8.0 or later.</value></data>
+  <data name="OptionsPage_ExportCompleteTitle" xml:space="preserve"><value>Export complete</value></data>
+  <data name="OptionsPage_ExportCompleteMessage" xml:space="preserve"><value>Movie data exported to {0}</value></data>
+  <data name="OptionsPage_ExportFailedTitle" xml:space="preserve"><value>Export failed</value></data>
+  <data name="OptionsPage_ExportFailedMessage" xml:space="preserve"><value>The movie data could not be exported.</value></data>
+
+  <data name="MoviesPage_DeleteMoviesTitle" xml:space="preserve"><value>Delete movies</value></data>
+  <data name="MoviesPage_DeleteMoviesMessage" xml:space="preserve"><value>Delete {0} selected movie(s)?</value></data>
+  <data name="MoviesPage_ErrorTitle" xml:space="preserve"><value>Error!</value></data>
+  <data name="MoviesPage_ChipYear" xml:space="preserve"><value>Year</value></data>
+  <data name="MoviesPage_ChipTag" xml:space="preserve"><value>Tag</value></data>
+  <data name="MoviesPage_ChipUnknownTag" xml:space="preserve"><value>?</value></data>
+
+  <data name="FileService_ImportPickerTitle" xml:space="preserve"><value>Select a movie database JSON file</value></data>
+</root>

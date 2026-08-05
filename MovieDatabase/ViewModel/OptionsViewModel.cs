@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Storage;
+using MovieDatabase.Localization;
 using MovieDatabase.Services;
 
 namespace MovieDatabase.ViewModel
@@ -8,6 +9,7 @@ namespace MovieDatabase.ViewModel
         readonly TagService tagService;
         readonly DataService dataService;
         readonly FileService fileService;
+        readonly LocalizationResourceManager localization;
 
         public ObservableCollection<TagListItem> Tags { get; } = new();
 
@@ -17,12 +19,21 @@ namespace MovieDatabase.ViewModel
         [ObservableProperty]
         public partial int NewTagColorIndex { get; set; }
 
-        public OptionsViewModel(TagService tagService, DataService dataService, FileService fileService)
+        [ObservableProperty]
+        public partial AppLanguage SelectedLanguage { get; set; }
+
+        public OptionsViewModel(TagService tagService, DataService dataService, FileService fileService, LocalizationResourceManager localization)
         {
-            Title = "Options";
             this.tagService = tagService;
             this.dataService = dataService;
             this.fileService = fileService;
+            this.localization = localization;
+            SelectedLanguage = localization.CurrentLanguage;
+        }
+
+        partial void OnSelectedLanguageChanged(AppLanguage value)
+        {
+            localization.SetLanguage(value);
         }
 
         public async Task LoadAsync()
@@ -60,10 +71,10 @@ namespace MovieDatabase.ViewModel
         async Task DeleteTagAsync(TagListItem item)
         {
             bool confirmed = await Shell.Current.DisplayAlertAsync(
-                "Delete tag",
-                $"Delete tag '{item.Name}'? It will be removed from all movies.",
-                "Delete",
-                "Cancel");
+                localization["OptionsPage_DeleteTagTitle"],
+                string.Format(localization["OptionsPage_DeleteTagMessage"], item.Name),
+                localization["Common_Delete"],
+                localization["Common_Cancel"]);
 
             if (!confirmed)
             {
@@ -85,7 +96,7 @@ namespace MovieDatabase.ViewModel
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlertAsync("Import failed", ex.Message, "OK");
+                await Shell.Current.DisplayAlertAsync(localization["OptionsPage_ImportFailedTitle"], ex.Message, localization["Common_OK"]);
                 return;
             }
 
@@ -99,13 +110,13 @@ namespace MovieDatabase.ViewModel
                 await dataService.ImportAsync(filePath);
                 await LoadAsync();
                 await Shell.Current.DisplayAlertAsync(
-                    "Import complete",
-                    "The movie data was imported successfully.",
-                    "OK");
+                    localization["OptionsPage_ImportCompleteTitle"],
+                    localization["OptionsPage_ImportCompleteMessage"],
+                    localization["Common_OK"]);
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlertAsync("Import failed", ex.Message, "OK");
+                await Shell.Current.DisplayAlertAsync(localization["OptionsPage_ImportFailedTitle"], ex.Message, localization["Common_OK"]);
             }
         }
 
@@ -115,9 +126,9 @@ namespace MovieDatabase.ViewModel
             if (OperatingSystem.IsAndroid() && !OperatingSystem.IsAndroidVersionAtLeast(26))
             {
                 await Shell.Current.DisplayAlertAsync(
-                    "Not supported",
-                    "Exporting requires Android 8.0 or later.",
-                    "OK");
+                    localization["OptionsPage_ExportNotSupportedTitle"],
+                    localization["OptionsPage_ExportNotSupportedMessage"],
+                    localization["Common_OK"]);
                 return;
             }
 
@@ -138,17 +149,17 @@ namespace MovieDatabase.ViewModel
             {
                 await dataService.ExportAsync(pickResult.Folder.Path);
                 await Shell.Current.DisplayAlertAsync(
-                    "Export complete",
-                    $"Movie data exported to {pickResult.Folder.Path}",
-                    "OK");
+                    localization["OptionsPage_ExportCompleteTitle"],
+                    string.Format(localization["OptionsPage_ExportCompleteMessage"], pickResult.Folder.Path),
+                    localization["Common_OK"]);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to export movie database data: {ex}");
                 await Shell.Current.DisplayAlertAsync(
-                    "Export failed",
-                    "The movie data could not be exported.",
-                    "OK");
+                    localization["OptionsPage_ExportFailedTitle"],
+                    localization["OptionsPage_ExportFailedMessage"],
+                    localization["Common_OK"]);
             }
         }
     }

@@ -5,12 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
     xmlns:controls="clr-namespace:MovieDatabase.Controls"
-    Title="Options"
+    xmlns:loc="clr-namespace:MovieDatabase.Localization"
+    Title="{loc:Translate OptionsPage_Title}"
     x:DataType="viewmodel:OptionsViewModel">
 	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
 		<VerticalStackLayout Padding="10" Spacing="14">
 
-			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="Tags" />
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="{loc:Translate OptionsPage_TagsHeader}" />
 
 			<VerticalStackLayout BindableLayout.ItemsSource="{Binding Tags}" Spacing="8">
 				<BindableLayout.ItemTemplate>
@@ -35,11 +36,11 @@
 								</Grid>
 
 								<VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditing}">
-									<Entry Text="{Binding EditName}" Placeholder="Tag name" />
+									<Entry Text="{Binding EditName}" Placeholder="{loc:Translate OptionsPage_TagNamePlaceholder}" />
 									<controls:ColorPickerView SelectedIndex="{Binding EditColorIndex}" />
 									<HorizontalStackLayout Spacing="10">
-										<Button Text="Save" Command="{Binding SaveCommand}" />
-										<Button Text="Cancel" Style="{StaticResource ButtonOutline}" Command="{Binding CancelCommand}" />
+										<Button Text="{loc:Translate Common_Save}" Command="{Binding SaveCommand}" />
+										<Button Text="{loc:Translate Common_Cancel}" Style="{StaticResource ButtonOutline}" Command="{Binding CancelCommand}" />
 									</HorizontalStackLayout>
 								</VerticalStackLayout>
 
@@ -51,8 +52,8 @@
 
 			<BoxView Style="{StaticResource SectionDivider}" />
 
-			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="Add tag" />
-			<Entry Text="{Binding NewTagName}" Placeholder="Tag name" />
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="{loc:Translate OptionsPage_AddTagHeader}" />
+			<Entry Text="{Binding NewTagName}" Placeholder="{loc:Translate OptionsPage_TagNamePlaceholder}" />
 			<controls:ColorPickerView SelectedIndex="{Binding NewTagColorIndex}" />
 			<Button Text="" HorizontalOptions="Start" Command="{Binding AddTagCommand}"
                 Style="{StaticResource IconButton}">
@@ -63,11 +64,23 @@
 
 			<BoxView Style="{StaticResource SectionDivider}" />
 
-			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="Import / Export" />
-			<Label Text="Import a previously exported movie database file. This replaces the current data." />
-			<Button Text="Import" Command="{Binding ImportDataCommand}" HorizontalOptions="Fill" />
-			<Label Text="Export the movie collection to a folder of your choice." />
-			<Button Text="Export" Command="{Binding ExportDataCommand}" HorizontalOptions="Fill" />
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="{loc:Translate OptionsPage_LanguageHeader}" />
+			<VerticalStackLayout Spacing="4"
+                RadioButtonGroup.GroupName="AppLanguage"
+                RadioButtonGroup.SelectedValue="{Binding SelectedLanguage}">
+				<!-- Language names are shown in their own language on purpose, not translated,
+                     so users can find their language even if the current UI language is unreadable to them. -->
+				<RadioButton Content="English" Value="{x:Static loc:AppLanguage.English}" />
+				<RadioButton Content="Deutsch" Value="{x:Static loc:AppLanguage.German}" />
+			</VerticalStackLayout>
+
+			<BoxView Style="{StaticResource SectionDivider}" />
+
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="{loc:Translate OptionsPage_ImportExportHeader}" />
+			<Label Text="{loc:Translate OptionsPage_ImportDescription}" />
+			<Button Text="{loc:Translate OptionsPage_ImportButton}" Command="{Binding ImportDataCommand}" HorizontalOptions="Fill" />
+			<Label Text="{loc:Translate OptionsPage_ExportDescription}" />
+			<Button Text="{loc:Translate OptionsPage_ExportButton}" Command="{Binding ExportDataCommand}" HorizontalOptions="Fill" />
 
 		</VerticalStackLayout>
 	</ScrollView>

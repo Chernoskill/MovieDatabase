@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MainPage_Title" xml:space="preserve">
+    <value>Filme</value>
+  </data>
+  <data name="FilterPage_Title" xml:space="preserve">
+    <value>Filme filtern</value>
+  </data>
+  <data name="OptionsPage_Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="MainPage_DirectorPrefix" xml:space="preserve">
+    <value>R:</value>
+  </data>
+  <data name="MainPage_ActorsPrefix" xml:space="preserve">
+    <value>D:</value>
+  </data>
+  <data name="FilterPage_TitleLabel" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="FilterPage_TitlePlaceholder" xml:space="preserve">
+    <value>Titel enthält… (* als Platzhalter)</value>
+  </data>
+  <data name="FilterPage_DescriptionLabel" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="FilterPage_DescriptionPlaceholder" xml:space="preserve">
+    <value>Beschreibung enthält… (* als Platzhalter)</value>
+  </data>
+  <data name="FilterPage_DirectorLabel" xml:space="preserve">
+    <value>Regisseur</value>
+  </data>
+  <data name="FilterPage_DirectorPlaceholder" xml:space="preserve">
+    <value>Regisseur enthält… (* als Platzhalter)</value>
+  </data>
+  <data name="FilterPage_ActorsLabel" xml:space="preserve">
+    <value>Darsteller</value>
+  </data>
+  <data name="FilterPage_ActorsPlaceholder" xml:space="preserve">
+    <value>Darsteller enthält… (* als Platzhalter)</value>
+  </data>
+  <data name="FilterPage_YearRangeLabel" xml:space="preserve">
+    <value>Erscheinungsjahr</value>
+  </data>
+  <data name="FilterPage_YearFromPlaceholder" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="FilterPage_YearToPlaceholder" xml:space="preserve">
+    <value>Bis</value>
+  </data>
+  <data name="FilterPage_FavoriteLabel" xml:space="preserve">
+    <value>Favorit</value>
+  </data>
+  <data name="FilterPage_TagsLabel" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="FilterPage_ClearAll" xml:space="preserve">
+    <value>Alle löschen</value>
+  </data>
+  <data name="FilterPage_Apply" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="Filter_FavoriteAny" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="Filter_FavoriteOnly" xml:space="preserve">
+    <value>Nur Favoriten</value>
+  </data>
+  <data name="Filter_FavoriteNonOnly" xml:space="preserve">
+    <value>Keine Favoriten</value>
+  </data>
+  <data name="DetailsPage_TitlePlaceholder" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="DetailsPage_DescriptionPlaceholder" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="DetailsPage_DirectorPlaceholder" xml:space="preserve">
+    <value>Regisseur</value>
+  </data>
+  <data name="DetailsPage_ActorsPlaceholder" xml:space="preserve">
+    <value>Darsteller (kommagetrennt)</value>
+  </data>
+  <data name="DetailsPage_YearPlaceholder" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
+  <data name="DetailsPage_CountryPlaceholder" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="DetailsPage_DisplayIdPlaceholder" xml:space="preserve">
+    <value>Lagerort-ID</value>
+  </data>
+  <data name="DetailsPage_DirectorLabel" xml:space="preserve">
+    <value>Regisseur:</value>
+  </data>
+  <data name="DetailsPage_ActorsLabel" xml:space="preserve">
+    <value>Darsteller:</value>
+  </data>
+  <data name="DetailsPage_YearLabel" xml:space="preserve">
+    <value>Jahr:</value>
+  </data>
+  <data name="DetailsPage_CountryLabel" xml:space="preserve">
+    <value>Land:</value>
+  </data>
+  <data name="DetailsPage_IdLabel" xml:space="preserve">
+    <value>ID:</value>
+  </data>
+  <data name="DetailsPage_TagsLabel" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="OptionsPage_TagsHeader" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="OptionsPage_TagNamePlaceholder" xml:space="preserve">
+    <value>Tag-Name</value>
+  </data>
+  <data name="OptionsPage_AddTagHeader" xml:space="preserve">
+    <value>Tag hinzufügen</value>
+  </data>
+  <data name="OptionsPage_LanguageHeader" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="OptionsPage_ImportExportHeader" xml:space="preserve">
+    <value>Import / Export</value>
+  </data>
+  <data name="OptionsPage_ImportDescription" xml:space="preserve">
+    <value>Importiert eine zuvor exportierte Filmdatenbank-Datei. Dadurch werden die aktuellen Daten ersetzt.</value>
+  </data>
+  <data name="OptionsPage_ImportButton" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="OptionsPage_ExportDescription" xml:space="preserve">
+    <value>Exportiert die Filmsammlung in einen Ordner Ihrer Wahl.</value>
+  </data>
+  <data name="OptionsPage_ExportButton" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="OptionsPage_DeleteTagTitle" xml:space="preserve">
+    <value>Tag löschen</value>
+  </data>
+  <data name="OptionsPage_DeleteTagMessage" xml:space="preserve">
+    <value>Tag '{0}' löschen? Er wird von allen Filmen entfernt.</value>
+  </data>
+  <data name="OptionsPage_ImportFailedTitle" xml:space="preserve">
+    <value>Import fehlgeschlagen</value>
+  </data>
+  <data name="OptionsPage_ImportCompleteTitle" xml:space="preserve">
+    <value>Import abgeschlossen</value>
+  </data>
+  <data name="OptionsPage_ImportCompleteMessage" xml:space="preserve">
+    <value>Die Filmdaten wurden erfolgreich importiert.</value>
+  </data>
+  <data name="OptionsPage_ExportNotSupportedTitle" xml:space="preserve">
+    <value>Nicht unterstützt</value>
+  </data>
+  <data name="OptionsPage_ExportNotSupportedMessage" xml:space="preserve">
+    <value>Der Export erfordert Android 8.0 oder höher.</value>
+  </data>
+  <data name="OptionsPage_ExportCompleteTitle" xml:space="preserve">
+    <value>Export abgeschlossen</value>
+  </data>
+  <data name="OptionsPage_ExportCompleteMessage" xml:space="preserve">
+    <value>Filmdaten exportiert nach {0}</value>
+  </data>
+  <data name="OptionsPage_ExportFailedTitle" xml:space="preserve">
+    <value>Export fehlgeschlagen</value>
+  </data>
+  <data name="OptionsPage_ExportFailedMessage" xml:space="preserve">
+    <value>Die Filmdaten konnten nicht exportiert werden.</value>
+  </data>
+  <data name="MoviesPage_DeleteMoviesTitle" xml:space="preserve">
+    <value>Filme löschen</value>
+  </data>
+  <data name="MoviesPage_DeleteMoviesMessage" xml:space="preserve">
+    <value>{0} ausgewählte(n) Film(e) löschen?</value>
+  </data>
+  <data name="MoviesPage_ErrorTitle" xml:space="preserve">
+    <value>Fehler!</value>
+  </data>
+  <data name="MoviesPage_ChipYear" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
+  <data name="MoviesPage_ChipTag" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="MoviesPage_ChipUnknownTag" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="FileService_ImportPickerTitle" xml:space="preserve">
+    <value>Wählen Sie eine JSON-Datei der Filmdatenbank aus</value>
+  </data>
+</root>

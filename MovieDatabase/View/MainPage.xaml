@@ -6,8 +6,9 @@
     xmlns:model="clr-namespace:MovieDatabase.Model"
     xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:loc="clr-namespace:MovieDatabase.Localization"
     x:Name="Root"
-    Title="Movies"
+    Title="{loc:Translate MainPage_Title}"
     x:DataType="viewmodel:MoviesViewModel">
 	<Grid
         RowDefinitions="Auto,Auto,*,Auto"
@@ -106,8 +107,14 @@
 										</VerticalStackLayout.Behaviors>
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
 										<Label Style="{StaticResource MediumLabel}" Text="{Binding CountryYearDisplay}" IsVisible="{Binding HasCountryYear}" />
-										<Label Style="{StaticResource SmallLabel}" Text="{Binding Director, StringFormat='D: {0}'}" IsVisible="{Binding HasDirector}" />
-										<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay, StringFormat='A: {0}'}" IsVisible="{Binding HasActors}" />
+										<HorizontalStackLayout Spacing="4" IsVisible="{Binding HasDirector}">
+											<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate MainPage_DirectorPrefix}" />
+											<Label Style="{StaticResource SmallLabel}" Text="{Binding Director}" />
+										</HorizontalStackLayout>
+										<HorizontalStackLayout Spacing="4" IsVisible="{Binding HasActors}">
+											<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate MainPage_ActorsPrefix}" />
+											<Label Style="{StaticResource SmallLabel}" Text="{Binding ActorsDisplay}" />
+										</HorizontalStackLayout>
 										<HorizontalStackLayout Spacing="6" Margin="0,4,0,0" BindableLayout.ItemsSource="{Binding TagBadges}">
 											<BindableLayout.ItemTemplate>
 												<DataTemplate x:DataType="model:TagBadge">

@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
     xmlns:model="clr-namespace:MovieDatabase.Model"
+    xmlns:loc="clr-namespace:MovieDatabase.Localization"
     Title="{Binding Movie.Title}"
     x:DataType="viewmodel:MovieDetailsViewModel">
 	<Grid RowDefinitions="*,Auto">
@@ -20,7 +21,7 @@
                    Margin="0,0,0,8"
                    IsVisible="{Binding IsNotEditing}"/>
 				<Entry Text="{Binding Movie.Title}"
-                   Placeholder="Title"
+                   Placeholder="{loc:Translate DetailsPage_TitlePlaceholder}"
                    HorizontalTextAlignment="Start"
                    IsVisible="{Binding IsEditing}"/>
 
@@ -28,48 +29,53 @@
                    Text="{Binding Movie.Description}"
                    IsVisible="{Binding IsNotEditing}"/>
 				<Editor Text="{Binding Movie.Description}"
-                    Placeholder="Description"
+                    Placeholder="{loc:Translate DetailsPage_DescriptionPlaceholder}"
                     AutoSize="TextChanges"
                     IsVisible="{Binding IsEditing}"/>
 
-				<Label Style="{StaticResource SmallLabel}"
-                   Text="{Binding Movie.Director, StringFormat='Director: {0}'}"
-                   IsVisible="{Binding IsNotEditing}"/>
+				<HorizontalStackLayout Spacing="4" IsVisible="{Binding IsNotEditing}">
+					<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate DetailsPage_DirectorLabel}" />
+					<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.Director}" />
+				</HorizontalStackLayout>
 				<Entry Text="{Binding Movie.Director}"
-                   Placeholder="Director"
+                   Placeholder="{loc:Translate DetailsPage_DirectorPlaceholder}"
                    IsVisible="{Binding IsEditing}"/>
 
-				<Label Style="{StaticResource SmallLabel}"
-                   Text="{Binding Movie.ActorsDisplay, StringFormat='Actors: {0}'}"
-                   IsVisible="{Binding IsNotEditing}"/>
+				<HorizontalStackLayout Spacing="4" IsVisible="{Binding IsNotEditing}">
+					<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate DetailsPage_ActorsLabel}" />
+					<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.ActorsDisplay}" />
+				</HorizontalStackLayout>
 				<Entry Text="{Binding ActorsText}"
-                   Placeholder="Actors (comma separated)"
+                   Placeholder="{loc:Translate DetailsPage_ActorsPlaceholder}"
                    IsVisible="{Binding IsEditing}"/>
 
-				<Label Style="{StaticResource SmallLabel}"
-                   Text="{Binding Movie.Year, StringFormat='Year: {0:yyyy}'}"
-                   IsVisible="{Binding IsNotEditing}"/>
+				<HorizontalStackLayout Spacing="4" IsVisible="{Binding IsNotEditing}">
+					<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate DetailsPage_YearLabel}" />
+					<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.Year, StringFormat='{0:yyyy}'}" />
+				</HorizontalStackLayout>
 				<Entry Text="{Binding YearText}"
-                   Placeholder="Year"
+                   Placeholder="{loc:Translate DetailsPage_YearPlaceholder}"
                    Keyboard="Numeric"
                    IsVisible="{Binding IsEditing}"/>
 
-				<Label Style="{StaticResource SmallLabel}"
-                   Text="{Binding Movie.Country, StringFormat='Country: {0}'}"
-                   IsVisible="{Binding IsNotEditing}"/>
+				<HorizontalStackLayout Spacing="4" IsVisible="{Binding IsNotEditing}">
+					<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate DetailsPage_CountryLabel}" />
+					<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.Country}" />
+				</HorizontalStackLayout>
 				<Entry Text="{Binding Movie.Country}"
-                   Placeholder="Country"
+                   Placeholder="{loc:Translate DetailsPage_CountryPlaceholder}"
                    IsVisible="{Binding IsEditing}"/>
 
-				<Label Style="{StaticResource SmallLabel}"
-                   Text="{Binding Movie.DisplayId, StringFormat='ID: {0}'}"
-                   IsVisible="{Binding IsNotEditing}"/>
+				<HorizontalStackLayout Spacing="4" IsVisible="{Binding IsNotEditing}">
+					<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate DetailsPage_IdLabel}" />
+					<Label Style="{StaticResource SmallLabel}" Text="{Binding Movie.DisplayId}" />
+				</HorizontalStackLayout>
 				<Entry Text="{Binding Movie.DisplayId}"
-                   Placeholder="Display ID"
+                   Placeholder="{loc:Translate DetailsPage_DisplayIdPlaceholder}"
                    IsVisible="{Binding IsEditing}"/>
 
 				<Label Style="{StaticResource SmallLabel}"
-                   Text="Tags"
+                   Text="{loc:Translate DetailsPage_TagsLabel}"
                    IsVisible="{Binding IsNotEditing}"/>
 				<HorizontalStackLayout
                     Spacing="6"

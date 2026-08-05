@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MovieDatabase.Localization;
 using MovieDatabase.Services;
 using MovieDatabase.View;
 
@@ -24,6 +25,10 @@ namespace MovieDatabase
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            // LocalizationResourceManager.Instance also initializes the active language (from the
+            // saved preference, falling back to the device locale) as a side effect of first access.
+            builder.Services.AddSingleton(LocalizationResourceManager.Instance);
 
             builder.Services.AddSingleton<FileService>();
             builder.Services.AddSingleton<DataService>();

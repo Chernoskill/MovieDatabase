@@ -1,3 +1,5 @@
+using MovieDatabase.Localization;
+
 #if WINDOWS
 using Windows.Storage.Pickers;
 using WinRT.Interop;
@@ -7,6 +9,13 @@ namespace MovieDatabase.Services
 {
     public class FileService
     {
+        readonly LocalizationResourceManager localization;
+
+        public FileService(LocalizationResourceManager localization)
+        {
+            this.localization = localization;
+        }
+
         public async Task SaveFileAsync(string fileName, string contents)
         {
             string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
@@ -64,7 +73,7 @@ namespace MovieDatabase.Services
 #else
             FileResult? result = await FilePicker.Default.PickAsync(new PickOptions
             {
-                PickerTitle = "Select a movie database JSON file",
+                PickerTitle = localization["FileService_ImportPickerTitle"],
                 FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
                     { DevicePlatform.Android, new[] { "application/json" } }

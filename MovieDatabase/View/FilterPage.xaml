@@ -4,33 +4,34 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
-    Title="Filter Movies"
+    xmlns:loc="clr-namespace:MovieDatabase.Localization"
+    Title="{loc:Translate FilterPage_Title}"
     x:DataType="viewmodel:FilterViewModel">
 	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
 		<VerticalStackLayout Padding="10" Spacing="10">
 
-			<Label Style="{StaticResource MediumLabel}" Text="Title" />
-			<Entry Text="{Binding TitleFilter}" Placeholder="Title contains… (use * as wildcard)" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_TitleLabel}" />
+			<Entry Text="{Binding TitleFilter}" Placeholder="{loc:Translate FilterPage_TitlePlaceholder}" />
 
-			<Label Style="{StaticResource MediumLabel}" Text="Description" />
-			<Entry Text="{Binding DescriptionFilter}" Placeholder="Description contains… (use * as wildcard)" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_DescriptionLabel}" />
+			<Entry Text="{Binding DescriptionFilter}" Placeholder="{loc:Translate FilterPage_DescriptionPlaceholder}" />
 
-			<Label Style="{StaticResource MediumLabel}" Text="Director" />
-			<Entry Text="{Binding DirectorFilter}" Placeholder="Director contains… (use * as wildcard)" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_DirectorLabel}" />
+			<Entry Text="{Binding DirectorFilter}" Placeholder="{loc:Translate FilterPage_DirectorPlaceholder}" />
 
-			<Label Style="{StaticResource MediumLabel}" Text="Actors" />
-			<Entry Text="{Binding ActorsFilter}" Placeholder="Actor contains… (use * as wildcard)" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_ActorsLabel}" />
+			<Entry Text="{Binding ActorsFilter}" Placeholder="{loc:Translate FilterPage_ActorsPlaceholder}" />
 
-			<Label Style="{StaticResource MediumLabel}" Text="Year range" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_YearRangeLabel}" />
 			<Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-				<Entry Grid.Column="0" Text="{Binding YearFromText}" Placeholder="From" Keyboard="Numeric" />
-				<Entry Grid.Column="1" Text="{Binding YearToText}" Placeholder="To" Keyboard="Numeric" />
+				<Entry Grid.Column="0" Text="{Binding YearFromText}" Placeholder="{loc:Translate FilterPage_YearFromPlaceholder}" Keyboard="Numeric" />
+				<Entry Grid.Column="1" Text="{Binding YearToText}" Placeholder="{loc:Translate FilterPage_YearToPlaceholder}" Keyboard="Numeric" />
 			</Grid>
 
-			<Label Style="{StaticResource MediumLabel}" Text="Favorite" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_FavoriteLabel}" />
 			<Picker ItemsSource="{Binding FavoriteOptions}" SelectedItem="{Binding FavoriteOption}" />
 
-			<Label Style="{StaticResource MediumLabel}" Text="Tags" />
+			<Label Style="{StaticResource MediumLabel}" Text="{loc:Translate FilterPage_TagsLabel}" />
 			<VerticalStackLayout BindableLayout.ItemsSource="{Binding TagOptions}" Spacing="4">
 				<BindableLayout.ItemTemplate>
 					<DataTemplate x:DataType="viewmodel:TagOption">
@@ -49,9 +50,9 @@
 			</VerticalStackLayout>
 
 			<HorizontalStackLayout Spacing="10" HorizontalOptions="Center" Margin="0,10,0,0">
-				<Button Text="Clear all" Style="{StaticResource ButtonOutline}" Command="{Binding ClearAllCommand}" />
-				<Button Text="Cancel" Style="{StaticResource ButtonOutline}" Command="{Binding CancelCommand}" />
-				<Button Text="Apply" Command="{Binding ApplyCommand}" />
+				<Button Text="{loc:Translate FilterPage_ClearAll}" Style="{StaticResource ButtonOutline}" Command="{Binding ClearAllCommand}" />
+				<Button Text="{loc:Translate Common_Cancel}" Style="{StaticResource ButtonOutline}" Command="{Binding CancelCommand}" />
+				<Button Text="{loc:Translate FilterPage_Apply}" Command="{Binding ApplyCommand}" />
 			</HorizontalStackLayout>
 
 		</VerticalStackLayout>

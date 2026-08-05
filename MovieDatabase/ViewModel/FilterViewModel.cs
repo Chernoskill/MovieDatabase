@@ -1,10 +1,11 @@
+using MovieDatabase.Localization;
 using MovieDatabase.Services;
 
 namespace MovieDatabase.ViewModel
 {
     public partial class FilterViewModel : BaseViewModel
     {
-        static readonly string[] favoriteOptionValues = { "Any", "Favorites only", "Non-favorites" };
+        readonly string[] favoriteOptionValues;
 
         readonly FilterService filterService;
         readonly TagService tagService;
@@ -28,17 +29,23 @@ namespace MovieDatabase.ViewModel
         public partial string? YearToText { get; set; }
 
         [ObservableProperty]
-        public partial string FavoriteOption { get; set; } = favoriteOptionValues[0];
+        public partial string FavoriteOption { get; set; }
 
         public string[] FavoriteOptions => favoriteOptionValues;
 
         public ObservableCollection<TagOption> TagOptions { get; } = new();
 
-        public FilterViewModel(FilterService filterService, TagService tagService)
+        public FilterViewModel(FilterService filterService, TagService tagService, LocalizationResourceManager localization)
         {
-            Title = "Filter Movies";
             this.filterService = filterService;
             this.tagService = tagService;
+            favoriteOptionValues = new[]
+            {
+                localization["Filter_FavoriteAny"],
+                localization["Filter_FavoriteOnly"],
+                localization["Filter_FavoriteNonOnly"]
+            };
+            FavoriteOption = favoriteOptionValues[0];
         }
 
         public async Task LoadAsync()
