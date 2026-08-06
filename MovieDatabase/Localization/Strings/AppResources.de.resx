@@ -318,4 +318,7 @@
   <data name="FileService_ImportPickerTitle" xml:space="preserve">
     <value>Wählen Sie eine JSON-Datei der Filmdatenbank aus</value>
   </data>
+  <data name="OptionsPage_VersionHeader" xml:space="preserve">
+    <value>Version</value>
+  </data>
 </root>

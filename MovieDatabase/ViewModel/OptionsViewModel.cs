@@ -13,6 +13,8 @@ namespace MovieDatabase.ViewModel
 
         public ObservableCollection<TagListItem> Tags { get; } = new();
 
+        public string AppVersion => AppInfo.Current.VersionString;
+
         [ObservableProperty]
         public partial string? NewTagName { get; set; }
 

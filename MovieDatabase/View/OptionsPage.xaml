@@ -11,6 +11,12 @@
 	<ScrollView BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
 		<VerticalStackLayout Padding="10" Spacing="14">
 
+			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="{loc:Translate OptionsPage_VersionHeader}" />
+
+			<Label Style="{StaticResource SmallLabel}" Text="{Binding AppVersion}" />
+
+			<BoxView Style="{StaticResource SectionDivider}" />
+
 			<Label Style="{StaticResource MediumLabel}" FontAttributes="Bold" Text="{loc:Translate OptionsPage_TagsHeader}" />
 
 			<VerticalStackLayout BindableLayout.ItemsSource="{Binding Tags}" Spacing="8">
