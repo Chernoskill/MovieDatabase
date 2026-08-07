@@ -5,9 +5,13 @@ namespace MovieDatabase.ViewModel
 {
     public partial class MoviesViewModel : BaseViewModel
     {
-        public ObservableCollection<Movie> Movies { get; } = new();
+        public RangeObservableCollection<Movie> Movies { get; } = new();
         public ObservableCollection<Movie> MarkedMovies { get; } = new();
         public ObservableCollection<ActiveFilterChip> ActiveFilters { get; } = new();
+
+        // Persisted here (not on the page) because MoviesViewModel is a singleton and outlives
+        // MainPage - this is what lets us restore the scroll position after navigating back to it.
+        public int LastVisibleIndex { get; set; }
 
         readonly MovieService movieService;
         readonly FilterService filterService;
@@ -54,6 +58,19 @@ namespace MovieDatabase.ViewModel
         {
             filterService.Criteria.Reset();
             filterService.NotifyFilterChanged();
+        }
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsSortByDisplayId))]
+        public partial MovieSortMode SortMode { get; set; }
+
+        public bool IsSortByDisplayId => SortMode == MovieSortMode.DisplayId;
+
+        [RelayCommand]
+        void ToggleSortMode()
+        {
+            SortMode = SortMode == MovieSortMode.Title ? MovieSortMode.DisplayId : MovieSortMode.Title;
+            _ = GetMoviesCommand.ExecuteAsync(null);
         }
 
         [ObservableProperty]
@@ -147,27 +164,30 @@ namespace MovieDatabase.ViewModel
                 IsBusy = true;
                 List<Movie>? movies = await movieService.GetMovies();
                 List<Tag> tags = await tagService.GetTags();
-
-                if (Movies.Count != 0)
-                {
-                    Movies.Clear();
-                }
+                Dictionary<Guid, Tag> tagsById = tags.ToDictionary(tag => tag.Id);
 
                 FilterCriteria criteria = filterService.Criteria;
+                IEnumerable<Movie> matching = (movies ?? new List<Movie>()).Where(criteria.Matches);
 
-                if (movies != null)
+                IEnumerable<Movie> sorted = SortMode == MovieSortMode.DisplayId
+                    ? matching
+                        .OrderBy(movie => string.IsNullOrEmpty(movie.DisplayId))
+                        .ThenBy(movie => movie.DisplayId, StringComparer.OrdinalIgnoreCase)
+                        .ThenBy(movie => movie.Title, StringComparer.OrdinalIgnoreCase)
+                    : matching.OrderBy(movie => movie.Title, StringComparer.OrdinalIgnoreCase);
+
+                List<Movie> result = sorted.ToList();
+
+                foreach (Movie movie in result)
                 {
-                    foreach (Movie movie in movies.Where(criteria.Matches))
-                    {
-                        movie.TagBadges = movie.Tags
-                            .Select(tagId => tags.FirstOrDefault(tag => tag.Id == tagId))
-                            .Where(tag => tag != null)
-                            .Select(tag => new TagBadge(tag!.Name, tag.ColorIndex))
-                            .ToList();
-
-                        Movies.Add(movie);
-                    }
+                    movie.TagBadges = movie.Tags
+                        .Select(tagId => tagsById.GetValueOrDefault(tagId))
+                        .Where(tag => tag != null)
+                        .Select(tag => new TagBadge(tag!.Name, tag.ColorIndex))
+                        .ToList();
                 }
+
+                Movies.ReplaceRange(result);
 
                 RefreshActiveFilters(criteria, tags);
             }

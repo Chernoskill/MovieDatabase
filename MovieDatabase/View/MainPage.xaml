@@ -18,11 +18,24 @@
 		<HorizontalStackLayout
             Grid.Row="0"
             Grid.ColumnSpan="2"
-            Padding="10,10,10,0"
+            Padding="10,10,10,10"
+            Spacing="10"
             HorizontalOptions="End">
 			<Button
+                x:Name="SortButton"
                 Text=""
-                ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xef4f;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSize}}"
+                ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xeb94;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSizeBig}}"
+                Style="{StaticResource IconButton}"
+                Command="{Binding ToggleSortModeCommand}">
+				<Button.Triggers>
+					<DataTrigger TargetType="Button" Binding="{Binding IsSortByDisplayId}" Value="True">
+						<Setter Property="ImageSource" Value="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xe242;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSizeBig}}" />
+					</DataTrigger>
+				</Button.Triggers>
+			</Button>
+			<Button
+                Text=""
+                ImageSource="{FontImageSource FontFamily=MaterialIconsOutlined, Glyph=&#xef4f;, Color={StaticResource Primary}, Size={StaticResource IconGlyphSizeBig}}"
                 Style="{StaticResource IconButton}"
                 Command="{Binding GoToFilterCommand}" />
 		</HorizontalStackLayout>
@@ -32,7 +45,7 @@
             Grid.ColumnSpan="2"
             Orientation="Horizontal"
             IsVisible="{Binding HasActiveFilters}"
-            Padding="10,10,10,0">
+            Padding="10,10,10,10">
 			<HorizontalStackLayout Spacing="6">
 				<HorizontalStackLayout BindableLayout.ItemsSource="{Binding ActiveFilters}" Spacing="6">
 					<BindableLayout.ItemTemplate>
@@ -64,8 +77,11 @@
             Command="{Binding GetMoviesCommand}"
             IsRefreshing="{Binding IsRefreshing}">
 			<CollectionView
+                        x:Name="MoviesCollectionView"
                         ItemsSource="{Binding Movies}"
-                        SelectionMode="None">
+                        ItemSizingStrategy="MeasureFirstItem"
+                        SelectionMode="None"
+                        Scrolled="OnCollectionViewScrolled">
 				<CollectionView.EmptyView>
 					<StackLayout Padding="100">
 						<Image
