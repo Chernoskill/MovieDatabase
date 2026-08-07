@@ -79,7 +79,6 @@
 			<CollectionView
                         x:Name="MoviesCollectionView"
                         ItemsSource="{Binding Movies}"
-                        ItemSizingStrategy="MeasureFirstItem"
                         SelectionMode="None"
                         Scrolled="OnCollectionViewScrolled">
 				<CollectionView.EmptyView>
@@ -98,7 +97,7 @@
 				<CollectionView.ItemTemplate>
 					<DataTemplate x:DataType="model:Movie">
 						<Grid Padding="10" HorizontalOptions="Fill">
-							<Border x:Name="ItemBorder" HeightRequest="125" Style="{StaticResource CardView}">
+							<Border x:Name="ItemBorder" MinimumHeightRequest="125" Style="{StaticResource CardView}">
 								<Border.Triggers>
 									<DataTrigger TargetType="Border" Binding="{Binding IsMarked}" Value="True">
 										<Setter Property="Background" Value="LightGray" />
@@ -121,7 +120,7 @@
                                                 LongPressCommandParameter="{Binding .}"
                                                 LongPressDuration="400" />
 										</VerticalStackLayout.Behaviors>
-										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
+										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" LineBreakMode="WordWrap" />
 										<Label Style="{StaticResource SmallLabel}" Text="{Binding CountryYearDisplay}" IsVisible="{Binding HasCountryYear}" />
 										<HorizontalStackLayout Spacing="4" IsVisible="{Binding HasDirector}">
 											<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate MainPage_DirectorPrefix}" />
