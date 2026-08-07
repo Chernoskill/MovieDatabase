@@ -6,12 +6,26 @@
     xmlns:viewmodel="clr-namespace:MovieDatabase.ViewModel"
     xmlns:model="clr-namespace:MovieDatabase.Model"
     xmlns:loc="clr-namespace:MovieDatabase.Localization"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="{Binding Movie.Title}"
     x:DataType="viewmodel:MovieDetailsViewModel">
+	<ContentPage.Resources>
+		<toolkit:BoolToObjectConverter x:Key="EditToggleBackgroundConverter" x:TypeArguments="Color"
+            TrueObject="{StaticResource Primary}"
+            FalseObject="{StaticResource IconButtonBackground}" />
+		<toolkit:BoolToObjectConverter x:Key="EditToggleImageSourceConverter" x:TypeArguments="ImageSource">
+			<toolkit:BoolToObjectConverter.TrueObject>
+				<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe5ca;" Size="{StaticResource IconGlyphSize}" Color="White" />
+			</toolkit:BoolToObjectConverter.TrueObject>
+			<toolkit:BoolToObjectConverter.FalseObject>
+				<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe3c9;" Size="{StaticResource IconGlyphSize}" Color="{StaticResource Primary}" />
+			</toolkit:BoolToObjectConverter.FalseObject>
+		</toolkit:BoolToObjectConverter>
+	</ContentPage.Resources>
 	<Grid RowDefinitions="*,Auto">
 		<ScrollView Grid.Row="0" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
-		<Grid RowDefinitions="*,Auto">
-			<VerticalStackLayout Grid.Row="0" Padding="10" Spacing="10">
+		<Grid RowDefinitions="*,Auto" ColumnDefinitions="*,Auto">
+			<VerticalStackLayout Grid.Row="0" Grid.Column="0" Padding="10" Spacing="10">
 
 				<Label Style="{StaticResource LargeLabel}"
                    TextColor="White"
@@ -117,6 +131,7 @@
 
 			<HorizontalStackLayout
                 Grid.Row="0"
+				Grid.Column="1"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
                 Spacing="4">
@@ -144,21 +159,9 @@
 			<Button
                 Text=""
                 Style="{StaticResource IconButton}"
-                Command="{Binding ToggleEditCommand}">
-				<Button.ImageSource>
-					<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe3c9;" Size="{StaticResource IconGlyphSize}" Color="{StaticResource Primary}" />
-				</Button.ImageSource>
-				<Button.Triggers>
-					<DataTrigger TargetType="Button" Binding="{Binding IsEditing}" Value="True">
-						<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-						<Setter Property="ImageSource">
-							<Setter.Value>
-								<FontImageSource FontFamily="MaterialIconsOutlined" Glyph="&#xe5ca;" Size="{StaticResource IconGlyphSize}" Color="White" />
-							</Setter.Value>
-						</Setter>
-					</DataTrigger>
-				</Button.Triggers>
-			</Button>
+                Command="{Binding ToggleEditCommand}"
+                BackgroundColor="{Binding IsEditing, Converter={StaticResource EditToggleBackgroundConverter}}"
+                ImageSource="{Binding IsEditing, Converter={StaticResource EditToggleImageSourceConverter}}" />
 			<Button
                 Text=""
                 Style="{StaticResource IconButton}"

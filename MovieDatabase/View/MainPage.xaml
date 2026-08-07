@@ -106,7 +106,7 @@
                                                 LongPressDuration="400" />
 										</VerticalStackLayout.Behaviors>
 										<Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
-										<Label Style="{StaticResource MediumLabel}" Text="{Binding CountryYearDisplay}" IsVisible="{Binding HasCountryYear}" />
+										<Label Style="{StaticResource SmallLabel}" Text="{Binding CountryYearDisplay}" IsVisible="{Binding HasCountryYear}" />
 										<HorizontalStackLayout Spacing="4" IsVisible="{Binding HasDirector}">
 											<Label Style="{StaticResource SmallLabel}" Text="{loc:Translate MainPage_DirectorPrefix}" />
 											<Label Style="{StaticResource SmallLabel}" Text="{Binding Director}" />
